@@ -61,5 +61,6 @@ module.exports = function(db, cb)
 
     Session.hasOne("user", User, {reverse:"sessions"});
     */
+    console.log("HAHAHA");
     db.sync();
 }   

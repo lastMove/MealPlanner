@@ -1,4 +1,4 @@
-
+var orm = require('orm');
 module.exports = function(db, cb)
 {
   var User = db.define('user', {
@@ -13,8 +13,8 @@ module.exports = function(db, cb)
   {
    validations:
    {
-    userName : [orm.enforce.required(error.errorStr(error.missingRequiredField, "userName missing")), orm.enforce.unique({ ignoreCase: true },  error.errorStr(error.usernameAlreadyUsed, "userName already used")), orm.enforce.ranges.length(3, undefined, error.errorStr(error.usernameTooShort, "userName too short"))], 
-    mail : [orm.enforce.patterns.email(error.errorStr(error.emailNotValid, "email not valid")), orm.enforce.unique({ignoreCase:true}, error.errorStr(error.emailAlreadyUsed, "email already used"))],
+    userName : [orm.enforce.required(), orm.enforce.unique({ ignoreCase: true },   "userName already used"), orm.enforce.ranges.length(3, undefined, "userName too short")], 
+    mail : [orm.enforce.patterns.email(), orm.enforce.unique({ignoreCase:true})],
     subscriptionDate :   orm.enforce.required(),
     lastAction :  orm.enforce.required()
   },
