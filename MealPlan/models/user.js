@@ -5,10 +5,9 @@ module.exports = function(db, cb)
     userName : String,
     password : String,
     mail : String,
-    mark : Number,
     subscriptionDate : Date,
     resetPasswordToken : String,
-    resetPasswordExpires :  Date,
+    resetPasswordExpires :  Date
   },
   {
    validations:
@@ -16,14 +15,13 @@ module.exports = function(db, cb)
     userName : [orm.enforce.required(), orm.enforce.unique({ ignoreCase: true },   "userName already used"), orm.enforce.ranges.length(3, undefined, "userName too short")], 
     mail : [orm.enforce.patterns.email(), orm.enforce.unique({ignoreCase:true})],
     subscriptionDate :   orm.enforce.required(),
-    lastAction :  orm.enforce.required()
   },
   hooks: 
     {
       beforeCreate: function (next) 
       {
-      this.subscriptionDate = new Date();
-      this.mark = 0;
+         this.subscriptionDate = new Date();
+        next();
       }
     }
   });
