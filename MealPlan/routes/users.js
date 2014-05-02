@@ -17,7 +17,6 @@ exports.createUser = function(req, res, next)
 		mail:mail
 	}, function(err, user)
 	{
-		console.log("CREATED");
 		console.log(err)
 		if (err)
 			return next(err);
