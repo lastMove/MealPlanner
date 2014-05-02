@@ -4,6 +4,15 @@ module.exports = function(db, cb)
 	  {
 	  		text : String,
     		date : {type:"date", time:true}
-
+       },
+       {
+       	hooks:
+       	{
+       		beforeCreate : function(next)
+       		{
+       			this.date = new Date();
+       			next();
+       		}
+       	}	
        });
 }
