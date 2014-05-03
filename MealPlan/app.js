@@ -14,7 +14,7 @@ var orm = require('orm');
 var fs = require('fs');
 var router = require('./router').myRouter;
 
-var dbConfig = fs.readFileSync('config/db-config.json');
+//var dbConfig = fs.readFileSync('config/db-config.json');
 
 orm.settings.set("connection.debug", true);
 orm.settings.set("instance.cache", false); 
@@ -30,6 +30,7 @@ app.use(cookieParser());
 app.use(session({ secret: 'whatever', store: store }));
 
 app.use(orm.express({
+    "password" : "21529f",
     "host"     : "localhost",
     "database" : "mealPlan",
     "protocol" : "mysql"
