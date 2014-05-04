@@ -1,8 +1,8 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
-}
+td.td-title { font-weight: bold; padding-right: 10px; }
+table.panel-table { border-collapse: separate; border-spacing: 10px 10px; }
+.head-panel-tab { margin-bottom: 10px; }
+#forgot-pass { text-align: center; margin-top: 5px; }
+div.day-choice { margin: 10px; }
+div.day-choice div.day-list { margin-bottom: 10px;  }
+div.day-choice div.day-list span.bold { font-weight: bold; padding-right: 5px; display: inline-block; }
+div.day-choice div.day-list input.checkbox-day { margin-right: 25px; }

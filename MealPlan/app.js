@@ -27,7 +27,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
-app.use(session({ secret: 'whatever', store: store }));
+app.use(session({ secret: 'whatever', store: store}));
 
 app.use(orm.express({
     "password" : "21529f",
@@ -66,6 +66,7 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
+
 if (app.get('env') === 'development') 
 {
     app.use(function(err, req, res, next) {

@@ -5,15 +5,17 @@ var messages = require('./routes/messages');
 var restaurants = require('./routes/restaurants');
 var orders = require('./routes/orders');
 var order_lines = require('./routes/order_lines');
+var reservations = require('./routes/reservations');
 
 exports.myRouter = function(app)
 {
-	app.get('/',authAndLoadUser, function(req, res)
+	app.get('/', function(req, res)
 		{
 		//	res.send("Wesh");
 			throw newErr(409, "hahaha");
 			res.send("Wesh");
 		});
+
 	// USERS
 	app.get('/auth', authAndLoadUser, users.auth);
 	app.post('/users/create', users.createUser);
@@ -25,13 +27,14 @@ exports.myRouter = function(app)
 	app.put('/users/friends/remove/:friend_id', authAndLoadUser, users.removeFriend);
 	
 	// MEETINGS
-	app.get('/users/meetings/read', authAndLoadUser, meetings.readByUser);
+	app.get('/meetings/read', authAndLoadUser, meetings.readByUser);
 	app.post('/meetings/create', authAndLoadUser, meetings.create);
 	app.put('/meetings/:meeting_id/update', authAndLoadUser, loadMeeting,  meetings.update);
 	app.get('/meetings/:meeting_id/read', authAndLoadUser, loadMeeting, meetings.readOne);
 	app.delete('/meetings/:meeting_id/delete', authAndLoadUser, loadMeeting, meetings.delete);
 	app.get('/meetings/:meeting_id/members/read', authAndLoadUser, loadMeeting, meetings.listMembers);
 	app.put('/meetings/:meeting_id/members/add/:user_id', authAndLoadUser, loadMeeting, meetings.addMembers);
+
 	// MESSAGES (MEETINGS)
 	app.get('/meetings/:meeting_id/messages/read', authAndLoadUser, loadMeeting, messages.readAll);
 	app.post('/meetings/:meeting_id/messages/create', authAndLoadUser, loadMeeting, messages.create);
@@ -50,6 +53,13 @@ exports.myRouter = function(app)
 	//ORDERLINE
 	app.post('/order_lines/CreateForOrder', authAndLoadUser, order_lines.CreateForOrder);
 	app.delete('/order_lines/delete/:orderLine_id', authAndLoadUser, order_lines.delete);
+	// RESERVATION
+	app.post('/reservation/create', authAndLoadUser, reservations.create);
+	app.post('/reservation/create/:meeting_id', authAndLoadUser, loadMeeting, reservations.createFromMeeting);
+	app.put('/reservation/update/:reservation_id', authAndLoadUser, loadReservation, reservations.update);
+	app.post('/reservation/:reservation_id/validateByRestaurant', authAndLoadRestaurant, reservations.validateByRestaurant);
+	app.put('/reservation/:reservation_id/cancelByOwner', authAndLoadUser, loadReservation, reservations.cancelByOwner);
+	app.put('/reservation/:reservation_id/cancelByRestaurant', authAndLoadRestaurant, loadReservation, reservations.cancelByRestaurant);
 }
 
 // This is a middleware. To use for routes  that needs a user logged-in
@@ -112,6 +122,21 @@ loadMeeting = function(req, res, next)
 	{
 		if (err)
 		{
+			res.send(500, err);
+			return ;
+		}
+		req.meeting = meeting;
+		next();
+	});
+}
+
+loadReservation = function(req, res,next)
+{
+	req.db.models.meeting.get(req.params.reservation_id, function (err, meeting)
+	{
+		if (err)
+		{
+			console.log(err);
 			res.send(500, err);
 			return ;
 		}

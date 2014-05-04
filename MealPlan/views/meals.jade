@@ -1,0 +1,60 @@
+doctype html
+html
+	head
+		include include/meta
+		title= "Meal Planner - Meals"
+
+	body(role="document")
+		include include/menu
+		div.container
+			include include/title
+			h2 Meals
+			div.panel.panel-info
+				div.panel-heading.head-panel-tab
+					h3.panel-title #{restaurantName}'s meals
+				table#table_id.display
+					thead
+						tr
+							th Name
+							th Description
+							th Price
+							th
+							th
+					tbody
+						each i in mealList
+							tr
+								td= i.name
+								td= i.description
+								td= i.price
+								td(style="width:80px;")
+									button(class="btn btn-warning btn-xs", action="updateMeal", style="width:80px;") Update
+								td(style="width:80px;")
+									button(class="btn btn-danger btn-xs", action="deleteMeal", style="width:80px;") Delete
+
+			div.panel.panel-success
+				div.panel-heading
+					h3.panel-title Add a meal
+				table.panel-table
+					tbody
+						tr
+							td.td-title Name :
+							td
+								input(type="text", name="mealName")
+						tr
+							td.td-title Description :
+							td
+								input(type="text", name="mealDescription")
+						tr
+							td.td-title Price :
+							td
+								input(type="text", name="mealPrice")
+						tr
+							td
+							td
+								button(class="btn btn-success", action="addMeal", style="width:155px;") Add Meal
+
+	include include/footer
+	script(src="../public/js/jQuery/jquery-2.1.1.js")
+	script(src="../public/js/bootstrap-3.1.1-dist/js/bootstrap.min.js")
+	script(type="../public/js/text/javascript" charset="utf8" src="dataTables-1.10.0/media/js/jquery.dataTables.js")
+	script $(document).ready( function () { $('#table_id').DataTable(); } );

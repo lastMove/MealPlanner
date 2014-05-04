@@ -1,0 +1,42 @@
+doctype html
+html
+	head
+		include include/meta
+		title= "Meal Planner - Home"
+
+	body(role="document")
+		include include/menu
+		div.container.theme-showcase(role="main")
+			include include/title
+			h2 #{restaurantName}
+			div.panel.panel-info
+				div.panel-heading.head-panel-tab
+					h3.panel-title List of Reservations
+				table#table_id.display
+					thead
+						tr
+							th Name 
+							th Date
+							th Hour
+							th Number of seats
+							th Accepted
+					tbody
+						each i in reservationList
+							tr
+								td
+									a(href="#") #{i.name}
+								td= i.date
+								td= i.hour
+								td= i.seat
+								if i.accepted == "true"
+									td 
+										span.label.label-success Yes
+								else
+									td 
+										span.label.label-danger No
+		
+	include include/footer
+	script(src="../public/js/jQuery/jquery-2.1.1.js")
+	script(src="../public/js/bootstrap-3.1.1-dist/js/bootstrap.min.js")
+	script(type="text/javascript" charset="utf8" src="../public/js/dataTables-1.10.0/media/js/jquery.dataTables.js")
+	script $(document).ready( function () { $('#table_id').DataTable( { "order": [1, "asc"] } ); } );

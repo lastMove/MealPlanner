@@ -1,0 +1,48 @@
+doctype html
+html
+	head
+		include include/meta
+		title= "Meal Planner - Options"
+
+	body(role="document")
+		include include/menu
+		div.container
+			include include/title
+			h2 Options
+			div.panel.panel-default
+				div.panel-heading
+					h3.panel-title Openning Days
+				div.day-choice
+					div.day-list
+						each v, i in openningDays
+							span.bold= i
+							if v == "true"
+								input.checkbox-day(type="checkbox", name=i, checked="checked")
+							else
+								input.checkbox-day(type="checkbox", name=i)
+					button(class="btn btn-default", action="changeDays") Save Openning Days
+			div.panel.panel-warning
+				div.panel-heading
+					h3.panel-title Change password
+				table.panel-table
+					tbody
+						tr
+							td.td-title Old password :
+							td 
+								input(type="text", name="oldPass")
+						tr
+							td.td-title New password :
+							td 
+								input(type="text", name="newPass")
+						tr
+							td.td-title New password (verification) :
+							td 
+								input(type="text", name="verifPass")
+						tr
+							td
+							td
+								button(class="btn btn-warning", action="changePass", style="width:155px;") Change Password
+
+	include include/footer
+	script(src="../public/js/jQuery/jquery-2.1.1.js")
+	script(src="../public/js/bootstrap-3.1.1-dist/js/bootstrap.min.js")

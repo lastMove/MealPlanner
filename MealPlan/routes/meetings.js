@@ -12,12 +12,19 @@ exports.create = function(req, res, next)
 		address:address,
 		startDate:startDate,
 		endDate: endDate,
-		restaurant_id: restaurant_id
+		restaurant_id: restaurant_id,
+		owner_id : req.user.id
 	}, function(err, meeting)
 	{
 		if (err)
 			return next(err);
-		res.send(meeting);
+		meeting.addMembers(req.user, function(err, data)
+		{
+			if (err)
+				next(newErr(500, err));
+			res.send(meeting);
+
+		})
 	})
 }
 
