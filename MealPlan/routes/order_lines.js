@@ -22,11 +22,11 @@ exports.CreateForOrder = function(req, res, next)
 
 exports.delete = function(req, res, next)
 {
-	req.db.model.orderLine.find({ id : req.body.orderLine_id}).remove(function(err)
+	req.db.model.orderLine.find({ id : req.params.orderLine_id}).remove(function(err)
 	{
 		if (err)
 			next(newErr(500, err));
 		console.log("orderLine delete");
-		res.send({"orderLine delete"});
+		res.send("orderLine delete");
 	});
 }

@@ -16,6 +16,7 @@
     "orm": "~2.1.8",
     "passport": "~0.2.0",
     "passport-local": "~1.0.0",
-    "express-session": "~1.0.4"
+    "express-session": "~1.0.4",
+    "mysql": "^2.2.0"
   }
 }

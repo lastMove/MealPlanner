@@ -3,6 +3,9 @@ var users = require('./routes/users');
 var meetings = require('./routes/meetings');
 var messages = require('./routes/messages');
 var restaurants = require('./routes/restaurants');
+var orders = require('./routes/orders');
+var order_lines = require('./routes/order_lines');
+
 exports.myRouter = function(app)
 {
 	app.get('/',authAndLoadUser, function(req, res)
@@ -35,6 +38,18 @@ exports.myRouter = function(app)
 
 	// RESTAURANT
 	app.post('/restaurants/login', authAndLoadRestaurant, restaurants.login);
+
+	//ORDER
+	app.post('/orders/create', authAndLoadUser, orders.create);
+	app.put('/orders/validateByOwner', authAndLoadUser, orders.validateByOwner);
+	app.put('/orders/validateByRestaurant', authAndLoadRestaurant, orders.validateByRestaurant);
+	app.get('/orders/read', authAndLoadUser, orders.readAll);
+	app.get('/orders/read/:order_id', authAndLoadUser, orders.readOne);
+	app.get('/orders/readByOwner/:owner_id', authAndLoadUser, orders.readByOwner);
+
+	//ORDERLINE
+	app.post('/order_lines/CreateForOrder', authAndLoadUser, order_lines.CreateForOrder);
+	app.delete('/order_lines/delete/:orderLine_id', authAndLoadUser, order_lines.delete);
 }
 
 // This is a middleware. To use for routes  that needs a user logged-in
