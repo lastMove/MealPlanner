@@ -1,0 +1,65 @@
+doctype html
+html
+	head
+		include include/meta
+		title= "Meal Planner - Reservation"
+
+	body(role="document")
+		include include/menu
+		div.container.theme-showcase(role="main")
+			include include/title
+			h2 #{restaurantName} - Reservation
+			div.panel.panel-info
+				div.panel-heading
+					h3.panel-title Informations
+				table.panel-table
+					tbody
+						tr
+							td.td-title Name :
+							td #{name}
+						tr
+							td.td-title Date :
+							td #{date}
+						tr
+							td.td-title Hour :
+							td #{hour}
+						tr
+							td.td-title Number of seat :
+							td #{seat}
+						tr
+							td.td-title Accepted :
+							if accepted == "true"
+								td 
+									span.label.label-success Yes
+							else
+								td 
+									span.label.label-danger No
+
+			div.panel.panel-warning
+				div.panel-heading.head-panel-tab
+					h3.panel-title Meal list
+				table#table_id.display
+					thead
+						tr
+							th Name
+							th Description
+							th Price
+					tbody
+						each i in mealList
+							tr
+								td= i.name
+								td= i.description
+								td= i.price
+
+			p
+			if accepted == "true"
+				button(class="btn btn-lg btn-danger" action="acceptButtonAction") Cancel Reservation
+			else
+				button(class="btn btn-lg btn-primary" action="acceptButtonAction") Accept Reservation
+			
+		
+	include include/footer
+	script(src="../public/js/jQuery/jquery-2.1.1.js")
+	script(src="../public/js/bootstrap-3.1.1-dist/js/bootstrap.min.js")
+	script(type="text/javascript" charset="utf8" src="../public/js/dataTables-1.10.0/media/js/jquery.dataTables.js")
+	script $(document).ready( function () { $('#table_id').DataTable(); } );
