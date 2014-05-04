@@ -30,7 +30,7 @@ module.exports = function(db, cb)
 
     Message.hasOne("sender", User, {reverse : "messages"});
     Message.hasOne("meetings", Meeting, {reverse : "messages"});
-    Meeting.hasOne("Owner", User, {reverse : "meetings"});
+    Meeting.hasOne("Owner", User, {reverse : "meetingsOwned"});
     Meeting.hasMany("members", User, {}, {reverse : "meetings"});
     Meeting.hasOne("restaurant", Restaurant, {}, {reverse : "meetings"});
     
