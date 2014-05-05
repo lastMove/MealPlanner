@@ -28,6 +28,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(session({ secret: 'whatever', store: store}));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(orm.express({
     "host"     : "localhost",
@@ -48,7 +49,6 @@ app.use(orm.express({
 
 router(app);
 
-app.use(express.static(path.join(__dirname, 'public')));
 /// catch 404 and forwarding to error handler
 
 

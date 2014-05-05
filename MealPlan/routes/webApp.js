@@ -30,7 +30,7 @@ exports.loginPage = function(req, res, next)
 
 exports.signUpPage = function(req, res, next)
 {
-	res.render('signup')
+	res.render('register');
 }
 exports.dishesPage = function(req, res, next)
 {

@@ -78,7 +78,7 @@ authAndLoadUser = function(req, res, next)
 {
 	var userName = req.header("userName");
 	var password = req.header("password");
-			req.db.models.user.one({"userName":userName},
+	req.db.models.user.one({"userName":userName},
 			function(err, user)
 			{
 				if (!user)
@@ -99,6 +99,8 @@ authAndLoadUser = function(req, res, next)
 authAndLoadRestaurant = function(req, res, next)
 {
 	console.log(req.session);
+	var userName = req.session.userName;
+	var password = req.session.password;
 	if (!userName || !password)
 	{
 		res.redirect('/webApp/login');
@@ -117,8 +119,7 @@ authAndLoadRestaurant = function(req, res, next)
 				res.redirect('/webApp/login');
 				return ;
 			}
-			var userName = req.session.userName;
-			var password = req.session.password;
+			
 			req.restaurant = restaurant;
 			next();
 		});
