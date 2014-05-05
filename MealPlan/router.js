@@ -62,6 +62,9 @@ exports.myRouter = function(app)
 	//ORDERLINE
 	app.post('/order_lines/CreateForOrder', authAndLoadUser, order_lines.CreateForOrder);
 	app.delete('/order_lines/delete/:orderLine_id', authAndLoadUser, order_lines.delete);
+	app.put('/order_lines/update/:orderLine_id', authAndLoadUser, order_lines.update);
+	app.get('/order_lines/read/:order_id', authAndLoadUser, order_lines.readForOrder);
+
 	// RESERVATION
 	app.post('/reservation/create', authAndLoadUser, reservations.create);
 	app.post('/reservation/create/:meeting_id', authAndLoadUser, loadMeeting, reservations.createFromMeeting);

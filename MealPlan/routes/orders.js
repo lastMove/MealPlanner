@@ -36,8 +36,12 @@ exports.validateByOwner = function(req, res, next)
 		else
 		{
 			order.status = !(order.status);
-			order.save();
-			res.send({"order validate" : order});
+			order.save(function(err, order) {
+				if (err)
+					next(newErr(500, err));
+				else
+					res.send({"order validate" : order});
+			});
 		}
 	});
 }
@@ -53,8 +57,12 @@ exports.validateByRestaurant = function(req, res, next)
 		else
 		{
 			order.status = !(order.status);
-			order.save();
-			res.send({"order validate" : order});
+			order.save(function(err, order) {
+				if (err)
+					next(newErr(500, err));
+				else
+					res.send({"order validate" : order});
+			});
 		}
 	});
 }
