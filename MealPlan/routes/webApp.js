@@ -1,6 +1,7 @@
 
 exports.indexPage = function(req, res, next)
 {
+	console.log("toto");
 	// 1 Restaurant Name
 	req.Restaurant.getReservations(function(err, reservations)
 	{

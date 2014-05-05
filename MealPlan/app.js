@@ -28,9 +28,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(session({ secret: 'whatever', store: store}));
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(orm.express({
+    "password" : "root", 
     "host"     : "localhost",
     "database" : "mealPlan",
     "protocol" : "mysql"
@@ -49,6 +49,7 @@ app.use(orm.express({
 
 router(app);
 
+app.use(express.static(path.join(__dirname, 'public')));
 /// catch 404 and forwarding to error handler
 
 
