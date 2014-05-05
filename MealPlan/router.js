@@ -48,7 +48,8 @@ exports.myRouter = function(app)
 	app.put('/orders/validateByRestaurant', authAndLoadRestaurant, orders.validateByRestaurant);
 	app.get('/orders/read', authAndLoadUser, orders.readAll);
 	app.get('/orders/read/:order_id', authAndLoadUser, orders.readOne);
-	app.get('/orders/readByOwner/:owner_id', authAndLoadUser, orders.readByOwner);
+	app.get('/orders/readMyOrder', authAndLoadUser, orders.readMyOrder);
+	app.get('/orders/readForOwner/:owner_id', authAndLoadRestaurant, orders.readForOwner);
 
 	//ORDERLINE
 	app.post('/order_lines/CreateForOrder', authAndLoadUser, order_lines.CreateForOrder);
