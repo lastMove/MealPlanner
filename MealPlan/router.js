@@ -112,15 +112,15 @@ authAndLoadRestaurant = function(req, res, next)
 		{
 			if (!restaurant)
 			{
-				res.redirect('/webApp/login');
+				res.render('login', { "errorMessage" : "Invalid username" });
 				return ;
 			}
-			if (!restaurant.password != password)
+			if (restaurant.password != password)
 			{
-				res.redirect('/webApp/login');
+				res.render('login', { "errorMessage" : "Invalid password" });
 				return ;
-			}
-			
+			}		
+			res.redirect('/webApp');
 			req.restaurant = restaurant;
 			next();
 		});
