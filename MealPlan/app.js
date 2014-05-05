@@ -30,7 +30,6 @@ app.use(cookieParser());
 app.use(session({ secret: 'whatever', store: store}));
 
 app.use(orm.express({
-    "password" : "21529f",
     "host"     : "localhost",
     "database" : "mealPlan",
     "protocol" : "mysql"

@@ -20,6 +20,16 @@ exports.createFromMeeting = function(req, res, next)
 	});
 }
 
+exports.readByUser = function(req, res, next)
+{
+	req.user.getReservationsOwned(function(err, reservations)
+	{
+		if (err)
+			next(newErr(500, err));
+		res.send(reservations);
+	});
+}
+
 exports.create = function(req, res, next)
 {
 
