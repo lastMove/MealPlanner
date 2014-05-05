@@ -15,8 +15,11 @@ exports.CreateForOrder = function(req, res, next)
 	{
 		if (err)
 			next(newErr(500, err));
-		console.log("test create orderLine");
-		res.send({"orderLine" : orderLine});
+		else
+		{
+			console.log("test create orderLine");
+			res.send({"orderLine" : orderLine});
+		}
 	});
 }
 
@@ -26,7 +29,10 @@ exports.delete = function(req, res, next)
 	{
 		if (err)
 			next(newErr(500, err));
-		console.log("orderLine delete");
-		res.send("orderLine delete");
+		else
+		{
+			console.log("orderLine delete");
+			res.send("orderLine delete");
+		}
 	});
 }
