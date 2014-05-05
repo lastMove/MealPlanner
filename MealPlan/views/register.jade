@@ -7,15 +7,15 @@ html
 
 	body.no-padding
 		div.container
-			form.form-register(role="form" method="POST" action="/webapp/")
+			form.form-register(role="form" method="POST" action="/webapp/signup")
 				h2 Meal Planner - Registration
-				input(class="form-control" placeholder="Username" required="" autofocus="")
+				input(name="userName" class="form-control" placeholder="Username" required="" autofocus="")
 				input(type="email" class="form-control" placeholder="Email address" required="")
-				input(type="password" class="form-control" placeholder="Password" required="")
+				input(name="password" type="password" class="form-control" placeholder="Password" required="")
 				input(type="password" class="form-control" placeholder="Password (verification)" required="")
-				input(class="form-control" placeholder="Restaurant name" required="")
-				textarea(class="form-control" placeholder="Description of the restaurant...")
-				input(class="form-control" placeholder="Address" required="")
-				input(type="number" class="form-control" placeholder="Postal code" required="")
-				input(class="form-control" placeholder="City" required="")
+				input(name="name" class="form-control" placeholder="Restaurant name" required="")
+				textarea(name="description" class="form-control" placeholder="Description of the restaurant...")
+				input(name="address" class="form-control" placeholder="Address" required="")
+				input(name="postalCode" type="number" class="form-control" placeholder="Postal code" required="")
+				input(name="city" class="form-control" placeholder="City" required="")
 				button(class="btn btn-lg btn-info btn-block" type="submit") Register !
