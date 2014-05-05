@@ -1,12 +1,13 @@
+var newErr = require('../error').newError;
 
 exports.indexPage = function(req, res, next)
 {
 	// 1 Restaurant Name
-	req.Restaurant.getReservations(function(err, reservations)
+	req.restaurant.getReservations(function(err, reservations)
 	{
-		if (error)
+		if (err)
 			next(newErr(err));
-		res.render('mainPage', {
+		res.render('mainpage', {
        			restaurant: req.restaurant,
         		reservations: reservations
     	});	
@@ -21,7 +22,7 @@ exports.login = function(req, res, next)
 	console.log(req.body);
 	req.session.userName = userName;
 	req.session.password = password;
-	res.redirect('/webApp');
+	res.redirect('/webApp/main');
 }
 
 exports.signUp = function(req, res, next)
@@ -43,7 +44,7 @@ exports.signUp = function(req, res, next)
 	{
 		if (err)
 			next(newErr(err));
-		res.send(restaurant);
+		res.redirect('/webApp');
 	});
 }
 exports.loginPage = function(req, res, next)
