@@ -120,7 +120,6 @@ authAndLoadRestaurant = function(req, res, next)
 				res.render('login', { "errorMessage" : "Invalid password" });
 				return ;
 			}		
-			res.redirect('/webApp');
 			req.restaurant = restaurant;
 			next();
 		});
