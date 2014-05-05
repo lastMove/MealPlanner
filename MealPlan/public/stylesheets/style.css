@@ -1,3 +1,4 @@
+.no-padding { padding: 0px; }
 td.td-title { font-weight: bold; padding-right: 10px; }
 table.panel-table { border-collapse: separate; border-spacing: 10px 10px; }
 .head-panel-tab { margin-bottom: 10px; }
@@ -6,3 +7,5 @@ div.day-choice { margin: 10px; }
 div.day-choice div.day-list { margin-bottom: 10px;  }
 div.day-choice div.day-list span.bold { font-weight: bold; padding-right: 5px; display: inline-block; }
 div.day-choice div.day-list input.checkbox-day { margin-right: 25px; }
+form.form-register { width: 400px; margin: auto; }
+form.form-register .form-control { margin-bottom: 10px; }

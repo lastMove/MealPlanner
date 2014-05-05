@@ -24,24 +24,25 @@ html
 			div.panel.panel-warning
 				div.panel-heading
 					h3.panel-title Change password
-				table.panel-table
-					tbody
-						tr
-							td.td-title Old password :
-							td 
-								input(type="text", name="oldPass")
-						tr
-							td.td-title New password :
-							td 
-								input(type="text", name="newPass")
-						tr
-							td.td-title New password (verification) :
-							td 
-								input(type="text", name="verifPass")
-						tr
-							td
-							td
-								button(class="btn btn-warning", action="changePass", style="width:155px;") Change Password
+				form(role="form")
+					table.panel-table
+						tbody
+							tr
+								td.td-title Old password :
+								td 
+									input(type="password" name="oldPass" required="")
+							tr
+								td.td-title New password :
+								td 
+									input(type="password" name="newPass" required="")
+							tr
+								td.td-title New password (verification) :
+								td 
+									input(type="password" name="verifPass" required="" data-equals="password")
+							tr
+								td
+								td
+									button(class="btn btn-warning" type="submit"  style="width:155px;") Change Password
 
 	include include/footer
 	script(src="../public/js/jQuery/jquery-2.1.1.js")
