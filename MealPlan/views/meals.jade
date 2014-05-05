@@ -34,27 +34,28 @@ html
 			div.panel.panel-success
 				div.panel-heading
 					h3.panel-title Add a meal
-				table.panel-table
-					tbody
-						tr
-							td.td-title Name :
-							td
-								input(type="text", name="mealName")
-						tr
-							td.td-title Description :
-							td
-								input(type="text", name="mealDescription")
-						tr
-							td.td-title Price :
-							td
-								input(type="text", name="mealPrice")
-						tr
-							td
-							td
-								button(class="btn btn-success", action="addMeal", style="width:155px;") Add Meal
+				form(role="form")
+					table.panel-table
+						tbody
+							tr
+								td.td-title Name :
+								td
+									input(type="text" name="mealName" required="")
+							tr
+								td.td-title Description :
+								td
+									input(type="text" name="mealDescription" required="")
+							tr
+								td.td-title Price :
+								td
+									input(type="number" name="mealPrice" required="")
+							tr
+								td
+								td
+									button(class="btn btn-success" type="submit" style="width:155px;") Add Meal
 
 	include include/footer
 	script(src="../public/js/jQuery/jquery-2.1.1.js")
 	script(src="../public/js/bootstrap-3.1.1-dist/js/bootstrap.min.js")
-	script(type="../public/js/text/javascript" charset="utf8" src="dataTables-1.10.0/media/js/jquery.dataTables.js")
+	script(type="text/javascript" charset="utf8" src="../public/js/dataTables-1.10.0/media/js/jquery.dataTables.js")
 	script $(document).ready( function () { $('#table_id').DataTable(); } );

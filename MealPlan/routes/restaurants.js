@@ -1,19 +1,55 @@
 var newErr = require('../error').newError;
 
-exports.login = function(req, res, next)
-{
-	var userName = req.body.userName;
-	var password = req.body.password;
 
-	req.session.userName = userName;
-	req.session.password = password;
-	res.send("testHAHA");
-}
 
 exports.logout = function(req, res, next)
 {
 	req.session.destroy(function(err)
 	{
 		res.send("finish");
+	});
+}
+
+exports.addOpeningDay = function(req, res, next)
+{
+	var dow = req.body.dow;
+	var openTime = req.body.openTime;
+	var closeTime = req.body.closeTime;
+
+	if (!dow || !openTime || !closeTime)
+		console.log("something is missing ('closetime', 'openTime' or 'dow'");
+	req.db.models.openingDay.create(
+	{
+		dow : dow,
+		openTime : openTime,
+		closeTime : closeTime,
+		restaurant_id : restaurant.id
+	}, function(err, openingDays)
+	{
+		if (!err)
+			next(newErr(500, err));
+		res.redirect('/TOCOMPLETE');
+	});
+}
+
+exports.removeOpeningDayById = function(req, res, next)
+{
+	var id = req.body.id;
+	
+	req.db.models.openingDay.find({restaurant_id : restaurant.id, id : id}).remove(function(err){
+		if (err)
+			next(newErr(500, err));
+		res.redirect('/TOCOMPLETE');
+	});
+}
+
+exports.removeOpeningDayByDOW = function(req, res, next)
+{
+	var dow = req.body.dow;
+
+	req.db.models.openingDay.find({restaurant_id : restaurant.id, dow : dow}).remove(function(err){
+		if (err)
+			next(newErr(500, err));
+		res.redirect('/TOCOMPLETE');
 	});
 }

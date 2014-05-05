@@ -6,6 +6,7 @@ var restaurants = require('./routes/restaurants');
 var orders = require('./routes/orders');
 var order_lines = require('./routes/order_lines');
 var reservations = require('./routes/reservations');
+var webapp = require('./routes/webApp');
 
 exports.myRouter = function(app)
 {
@@ -16,6 +17,13 @@ exports.myRouter = function(app)
 			res.send("Wesh");
 		});
 
+	// WEBAPP
+	app.get('/webApp', authAndLoadRestaurant, webapp.indexPage);
+	app.get('/webApp/signup', webapp.signUpPage);
+	app.get('/webApp/login', webapp.loginPage);
+	app.get('/webApp/dishes', authAndLoadRestaurant, webapp.dishesPage);
+	app.get('/webApp/options', authAndLoadRestaurant, webapp.optionsPage);
+	app.post('/wenApp/login', webapp.login);
 	// USERS
 	app.get('/auth', authAndLoadUser, users.auth);
 	app.post('/users/create', users.createUser);
@@ -40,7 +48,7 @@ exports.myRouter = function(app)
 	app.post('/meetings/:meeting_id/messages/create', authAndLoadUser, loadMeeting, messages.create);
 
 	// RESTAURANT
-	app.post('/restaurants/login', authAndLoadRestaurant, restaurants.login);
+	app.post('/restaurants/login', authAndLoadRestaurant, webapp.login);
 
 	//ORDER
 	app.post('/orders/create', authAndLoadUser, orders.create);
@@ -71,7 +79,7 @@ authAndLoadUser = function(req, res, next)
 {
 	var userName = req.header("userName");
 	var password = req.header("password");
-			req.db.models.user.one({"userName":userName},
+	req.db.models.user.one({"userName":userName},
 			function(err, user)
 			{
 				if (!user)
@@ -92,9 +100,11 @@ authAndLoadUser = function(req, res, next)
 authAndLoadRestaurant = function(req, res, next)
 {
 	console.log(req.session);
+	var userName = req.session.userName;
+	var password = req.session.password;
 	if (!userName || !password)
 	{
-		res.redirect('/login');
+		res.redirect('/webApp/login');
 		return ;
 	}
 	req.db.models.restaurant.one({"userName":userName},
@@ -102,16 +112,15 @@ authAndLoadRestaurant = function(req, res, next)
 		{
 			if (!restaurant)
 			{
-				res.redirect('/login');
+				res.redirect('/webApp/login');
 				return ;
 			}
 			if (!restaurant.password != password)
 			{
-				res.redirect('/login');
+				res.redirect('/webApp/login');
 				return ;
 			}
-			var userName = req.session.userName;
-			var password = req.session.password;
+			
 			req.restaurant = restaurant;
 			next();
 		});
