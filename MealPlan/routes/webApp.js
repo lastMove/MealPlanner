@@ -1,7 +1,6 @@
 
 exports.indexPage = function(req, res, next)
 {
-	console.log("toto");
 	// 1 Restaurant Name
 	req.Restaurant.getReservations(function(err, reservations)
 	{
@@ -32,7 +31,8 @@ exports.signUp = function(req, res, next)
 	var name = req.body.name;
 	var password = req.body.password;
 	var category = req.body.category;
-
+	var description = req.body.description;
+	var address = String;                                                                                                             
 	req.db.models.restaurant.create(
 	{
 		userName : userName,
