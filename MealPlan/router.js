@@ -24,6 +24,7 @@ exports.myRouter = function(app)
 	app.get('/webApp/dishes', authAndLoadRestaurant, webapp.dishesPage);
 	app.get('/webApp/options', authAndLoadRestaurant, webapp.optionsPage);
 	app.post('/wenApp/login', webapp.login);
+	app.get('/webApp/signup', webapp.signup);
 	// USERS
 	app.get('/auth', authAndLoadUser, users.auth);
 	app.post('/users/create', users.createUser);
@@ -56,8 +57,7 @@ exports.myRouter = function(app)
 	app.put('/orders/validateByRestaurant', authAndLoadRestaurant, orders.validateByRestaurant);
 	app.get('/orders/read', authAndLoadUser, orders.readAll);
 	app.get('/orders/read/:order_id', authAndLoadUser, orders.readOne);
-	app.get('/orders/readMyOrder', authAndLoadUser, orders.readMyOrder);
-	app.get('/orders/readForOwner/:owner_id', authAndLoadRestaurant, orders.readForOwner);
+	app.get('/orders/readByOwner/:owner_id', authAndLoadUser, orders.readByOwner);
 
 	//ORDERLINE
 	app.post('/order_lines/CreateForOrder', authAndLoadUser, order_lines.CreateForOrder);
