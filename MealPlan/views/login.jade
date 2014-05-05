@@ -7,10 +7,14 @@ html
 
 	body
 		div.container
-			form.form-signin(role="form")
+			form.form-signin(role="form" method="post" action="/webapp/login")
 				h2.form-signin-heading Meal Planner - Login
-				input(type="email", class="form-control" placeholder="Email address" required="" autofocus="")
-				input(input type="password" class="form-control" placeholder="Password" required="")
+				input(class="form-control" placeholder="Username" name="userName" required="" autofocus="")
+				input(input type="password" class="form-control" placeholder="Password" name="password" required="")
 				button(class="btn btn-lg btn-info btn-block" type="submit") Sign in
-				div#forgot-pass
-					a(href="#") Register
+			div#forgot-pass
+				a(href="/webapp/signup") Sign Up !
+
+		if errorMessage
+			div.alert.alert-danger(style="margin:auto; margin-top:10px; width:300px;")
+				p #{errorMessage}
