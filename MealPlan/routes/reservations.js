@@ -33,7 +33,6 @@ exports.readByUser = function(req, res, next)
 	});
 }
 
-export
 
 exports.update = function(req, res, next)
 {

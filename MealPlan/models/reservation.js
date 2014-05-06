@@ -6,17 +6,17 @@ module.exports = function(db, cb)
 		peopleNumber : Number,
 		kind : String,
 		creationDate : { type: "date", time: true },
-		reservationDate : {type : " date", time: true}
+		reservationDate : {type : "date", time: true},
 		validationStatus : ["validateByRestaurant", "cancelledByUser", "cancelledByRestaurant", "none"],
 	},
 	{
-		autoFetch: true,
 		hooks:
 		{
 			beforeCreate: function(next)
 			{
-				this.creationDate = new Date();
+				this.date = new Date();
 				this.validationStatus = "none";
+				this.creationDate = new Date();
 				next();
 			}
 		}
