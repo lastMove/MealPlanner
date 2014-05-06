@@ -5,11 +5,11 @@ exports.indexPage = function(req, res, next)
 	// 1 Restaurant Name
 	req.restaurant.getReservations(function(err, reservations)
 	{
+		console.log(JSON.stringify(req.restaurant));
 		if (err)
 			next(newErr(err));
 		res.render('mainpage', {
-       			restaurant: req.restaurant,
-        		reservations: reservations
+       			restaurant: req.restaurant
     	});	
 	});
 }
@@ -22,7 +22,15 @@ exports.login = function(req, res, next)
 	console.log(req.body);
 	req.session.userName = userName;
 	req.session.password = password;
-	res.redirect('/webApp/main');
+	res.redirect('/webApp');
+}
+
+exports.logout = function(req, res, next)
+{
+	req.session.destroy(function(err)
+	{
+		res.redirect('/webApp/login')
+	});
 }
 
 exports.signUp = function(req, res, next)
@@ -78,8 +86,7 @@ exports.reservationPage = function(req, res, next)
 {
 	req.reservation.getOrder(function(err, order)
 	{
-		if (order)
-			res.render('reservation', {restaurant : req.restaurant, reservation : req.reservation, order : order});
+		res.render('reservation', {restaurant : req.restaurant, reservation : req.reservation, order : order});
 	})
 }
 

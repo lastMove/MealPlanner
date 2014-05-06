@@ -9,6 +9,7 @@ module.exports = function(db, cb)
 		validationStatus : ["validateByRestaurant", "cancelledByUser", "cancelledByRestaurant", "none"],
 	},
 	{
+		autoFetch: true,
 		hooks:
 		{
 			beforeCreate: function(next)
