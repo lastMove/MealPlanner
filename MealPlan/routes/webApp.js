@@ -149,3 +149,33 @@ exports.reservationPage = function(req, res, next)
 {
 	res.render('reservation', {reservation : req.reservation});
 }
+
+exports.changePassword = function(req, res, next)
+{
+	var oldPassword = req.body.oldPassword;
+	var newPassword = req.body.newPassword;
+	var reNewPasword = req.body.reNewPasword;
+
+	if (req.restaurant.password == oldPassword && newPassword == reNewPasword)
+	{
+		req.db.models.restaurant.one({ userName : req.restaurant.userName}, function(err, restaurant){
+			if (err)
+				res.redirect('/webApp/option?changePass=failure');
+			else
+			{
+				restaurant.password = newPassword;
+				restaurant.save(function(err, restaurant){
+					if (err)
+						res.redirect('/webApp/option?changePass=failure');
+					else
+					{
+						req.restaurant = restaurant;
+						res.redirect('/webApp/option?changePass=succes');
+					}
+				});
+			}
+		});
+	}
+	else
+		res.redirect('/webApp/option?changePass=failure');
+}
