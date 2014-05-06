@@ -1,5 +1,5 @@
 {
-  "name": "application-name",
+  "name": "docMealPlan",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -19,5 +19,10 @@
     "express-session": "~1.0.4",
     "mysql": "^2.2.0",
     "moment": "^2.6.0"
-  }
+  },
+  "description": "doc meal plan",
+  "main": "app.js",
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC"
 }
