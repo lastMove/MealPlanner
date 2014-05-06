@@ -461,7 +461,7 @@
                "RequiresOAuth":"N",
                "parameters":[
                {
-               	       "Name":"reservation_id",
+               	     "Name":"reservation_id",
                      "Required":"Y",
                      "Default":"42",
                      "Type":"string",
@@ -469,10 +469,181 @@
                }]
             }
              	]
-      }
- 
- 
-      
+      },
+  {
+      "name":"Order",
+      "methods":
+      [
+         {
+            "MethodName":"create an order",
+            "Synopsis":"This method allows you to create an order",
+            "HTTPMethod":"POST",
+            "URI":"/orders/create",
+            "RequiresOAUTH":"N",
+            "parameters":[
+               {
+                  "Name":"restaurant_id",
+                  "Required":"Y",
+                  "Default":"42",
+                  "Type":"string",
+                  "Description":"restaurant where you make the order"
+               },
+               {
+                  "Name":"date",
+                  "Required":"Y",
+                  "Default":"05-31-2014 09:00:00",
+                  "Type":"string",
+                  "Description":"date you create the order"
+               }
+            ]
+         },
+         {
+            "MethodName":"validate an order by the owner",
+            "Synopsis":"This method allows the owner to validate an order",
+            "HTTPMethod":"PUT",
+            "URI":"/orders/validateByOwner",
+            "RequiresOAUTH":"N",
+            "parameters":[
+               {
+                  "Name":"order_id",
+                  "Required":"Y",
+                  "Default":"42",
+                  "Type":"string",
+                  "Description":"order id"
+               }
+            ]
+         },
+         {
+            "MethodName":"read all orders on db",
+            "Synopsis":"This method allows you to read all orders on db",
+            "HTTPMethod":"GET",
+            "URI":"/orders/read",
+            "RequiresOAUTH":"N",
+            "parameters":[]
+         },
+         {
+            "MethodName":"read a specific orders",
+            "Synopsis":"This method allows you to read a specific orders on db",
+            "HTTPMethod":"GET",
+            "URI":"/orders/read/:order_id",
+            "RequiresOAUTH":"N",
+            "parameters":[
+               {
+                 "Name":"order_id",
+                  "Required":"Y",
+                  "Default":"42",
+                  "Type":"string",
+                  "Description":"order id" 
+               }
+            ]
+         }
+      ]
+   }, 
+   {
+      "name":"OrderLine",
+      "methods":
+      [
+       {
+            "MethodName":"create an orderLine for an order",
+            "Synopsis":"This method allows you to create an orderLine for an order",
+            "HTTPMethod":"POST",
+            "URI":"/order_lines/createForOrder",
+            "RequiresOAUTH":"N",
+            "parameters":[
+               {
+                  "Name":"quantity",
+                  "Required":"Y",
+                  "Default":"8",
+                  "Type":"string",
+                  "Description":"Number of dish"
+               },
+               {
+                  "Name":"order_id",
+                  "Required":"Y",
+                  "Default":"42",
+                  "Type":"string",
+                  "Description":"order id associate to the orderLine"
+               },
+               {
+                  "Name":"dish_id",
+                  "Required":"Y",
+                  "Default":"42",
+                  "Type":"string",
+                  "Description":"dish id associate to orderLine"
+               }
+            ]
+         },
+         {
+            "MethodName":"delete an orderLine",
+            "Synopsis":"This method allows you to delete an orderLine",
+            "HTTPMethod":"DELETE",
+            "URI":"/order_lines/delete/:orderLine_id",
+            "RequiresOAUTH":"N",
+            "parameters":[
+               {
+                  "Name":"orderLine_id",
+                  "Required":"Y",
+                  "Default":"1",
+                  "Type":"string",
+                  "Description":"orderLine id"
+               }
+            ]
+         },
+         {
+            "MethodName":"update an orderLine",
+            "Synopsis":"This method allows you to update an orderLine",
+            "HTTPMethod":"PUT",
+            "URI":"/order_lines/update/:orderLine_id",
+            "RequiresOAUTH":"N",
+            "parameters":[
+               {
+                  "Name":"orderLine_id",
+                  "Required":"Y",
+                  "Default":"1",
+                  "Type":"string",
+                  "Description":"orderLine id"
+               },
+               {
+                  "Name":"quantity",
+                  "Required":"Y",
+                  "Default":"3",
+                  "Type":"string",
+                  "Description":"Number of dish"
+               },
+               {
+                  "Name":"order_id",
+                  "Required":"Y",
+                  "Default":"7",
+                  "Type":"string",
+                  "Description":"order id associate to the orderLine"
+               },
+               {
+                  "Name":"dish_id",
+                  "Required":"Y",
+                  "Default":"21",
+                  "Type":"string",
+                  "Description":"dish id associate to orderLine"
+               }
+            ]
+         },
+         {
+            "MethodName":"read orderLines associate to an order",
+            "Synopsis":"This method allows you read orderLines associate to an order",
+            "HTTPMethod":"GET",
+            "URI":"/order_lines/read/:order_id",
+            "RequiresOAUTH":"N",
+            "parameters":[
+               {
+                  "Name":"order_id",
+                  "Required":"Y",
+                  "Default":"1",
+                  "Type":"string",
+                  "Description":"order id"
+               }
+            ]
+         }
+      ]
+   }
    ]
 }
 

@@ -1,11 +1,13 @@
-exports.CreateForOrder = function(req, res, next)
+var newErr = require('../error').newError;
+
+exports.createForOrder = function(req, res, next)
 {
 	var user_id = req.user.id;
 	var quantity = req.body.quantity;
 	var order_id = req.body.order_id;
 	var dish_id = req.body.dish_id;
 
-	req.db.model.orderLine.create(
+	req.db.models.orderLine.create(
 	{
 		quantity : quantity,
 		order_id : order_id,
@@ -25,7 +27,7 @@ exports.CreateForOrder = function(req, res, next)
 
 exports.delete = function(req, res, next)
 {
-	req.db.model.orderLine.find({ id : req.params.orderLine_id}).remove(function(err)
+	req.db.models.orderLine.find({ id : req.params.orderLine_id}).remove(function(err)
 	{
 		if (err)
 			next(newErr(500, err));
@@ -47,7 +49,7 @@ exports.update = function(req, res, next)
 
 	if (quantity || order_id || dish_id)
 	{
-		req.db.models.orderLine.get(order_id, function(err, orderLine) {
+		req.db.models.orderLine.get(orderLine_id, function(err, orderLine) {
 			if (err)
 				next(newErr(500, err));
 			else

@@ -6,7 +6,10 @@ exports.create = function(req, res, next)
 	var owner_id = req.user.id;
 	var restaurant_id = req.body.restaurant_id ? req.body.restaurant_id : 0;
 
-	console.log("");
+	console.log("date: " + date);
+	console.log("owner_id: " + owner_id);
+	console.log("restaurant_id: " + restaurant_id);
+	
 	req.db.models.order.create(
 	{
 		date : date,

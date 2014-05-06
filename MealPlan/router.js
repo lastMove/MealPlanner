@@ -59,7 +59,7 @@ exports.myRouter = function(app)
 	//app.get('/orders/readByOwner/:owner_id', authAndLoadUser, orders.readByOwner);
 
 	//ORDERLINE
-	app.post('/order_lines/CreateForOrder', authAndLoadUser, order_lines.CreateForOrder);
+	app.post('/order_lines/createForOrder', authAndLoadUser, order_lines.createForOrder);
 	app.delete('/order_lines/delete/:orderLine_id', authAndLoadUser, order_lines.delete);
 	app.put('/order_lines/update/:orderLine_id', authAndLoadUser, order_lines.update);
 	app.get('/order_lines/read/:order_id', authAndLoadUser, order_lines.readForOrder);
