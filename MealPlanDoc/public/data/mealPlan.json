@@ -1,0 +1,649 @@
+{
+   "endpoints":[
+      {
+         "name":"User",
+         "methods":[
+            {
+               "MethodName":"create a user",
+               "Synopsis":"This method allows you to create a user",
+               "HTTPMethod":"POST",
+               "URI":"/users/create",
+               "RequiresOAuth":"N",
+               "parameters":[
+                  {
+                     "Name":"userName",
+                     "Required":"Y",
+                     "Default":"doc",
+                     "Type":"string",
+                     "Description":"userName"
+                  },
+                  {
+                     "Name":"password",
+                     "Required":"Y",
+                     "Default":"doc",
+                     "Type":"string",
+                     "Description":"password"
+                  },
+ 				{
+                     "Name":"mail",
+                     "Required":"Y",
+                     "Default":"doc@toto.com",
+                     "Type":"string",
+                     "Description":"mail"
+                  }
+               ]
+            },
+            {
+               "MethodName":"update a user",
+               "Synopsis":"This method allows you to update a user",
+               "HTTPMethod":"PUT",
+               "URI":"/users/update",
+               "RequiresOAuth":"N",
+               "parameters":[
+                  {
+                     "Name":"userName",
+                     "Required":"N",
+                     "Default":"doc",
+                     "Type":"string",
+                     "Description":"userName"
+                  },
+                  {
+                     "Name":"password",
+                     "Required":"N",
+                     "Default":"doc",
+                     "Type":"string",
+                     "Description":"password"
+                  },
+ 				{
+                     "Name":"mail",
+                     "Required":"N",
+                     "Default":"doc@toto.com",
+                     "Type":"string",
+                     "Description":"mail"
+                  }
+               ]
+            },
+            { 
+           	   "MethodName":"delete a user",
+               "Synopsis":"This method allows you to delete a user",
+               "HTTPMethod":"DELETE",
+               "URI":"/users/delete",
+               "RequiresOAuth":"N",
+               "parameters":[]
+            },
+            {
+            	"MethodName":"list friends",
+               "Synopsis":"This method allows you to create a user",
+               "HTTPMethod":"GET",
+               "URI":"/users/friends/read",
+               "RequiresOAuth":"N",
+               "parameters":[]
+            },
+            {
+            	"MethodName":"add a friend",
+               "Synopsis":"This method allows you to add a friend to user",
+               "HTTPMethod":"PUT",
+               "URI":"/users/friends/add/:friend_id",
+               "RequiresOAuth":"N",
+               	"parameters":[
+                 {
+                     "Name":"friend_id",
+                     "Required":"Y",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"One or more (comma-separated) friendId"
+                  }
+               	]
+     		 },
+     		{
+     	       "MethodName":"remove a friend",
+               "Synopsis":"This method allows you to remove a friend to user",
+               "HTTPMethod":"PUT",
+               "URI":"/users/friends/remove/:friend_id",
+               "RequiresOAuth":"N",
+               	"parameters":[
+                 {
+                     "Name":"users",
+                     "Required":"Y",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"One friendId"
+                  }
+               	]			 
+     	   	 }
+     		 ]
+      },
+      {
+      	"name":"Meeting",
+      	"methods":
+      	[
+      		{
+               "MethodName":"create a meeting",
+               "Synopsis":"This method allows you to create a meeting",
+               "HTTPMethod":"POST",
+               "URI":"/meeting/create",
+               "RequiresOAuth":"N",
+               "parameters":[
+                  {
+                     "Name":"address",
+                     "Required":"Y",
+                     "Type":"string",
+                     "Description":"address"
+                  },
+                  {
+                     "Name":"startDate",
+                     "Required":"Y",
+                     "Type":"string",
+                     "Description":"startDate"
+                  },
+ 				 {
+                     "Name":"endDate",
+                     "Required":"Y",
+                     "Type":"string",
+                     "Description":"endDate"
+                  },
+                  {
+                     "Name":"restaurant_id",
+                     "Required":"Y",
+                     "Default":"42",
+                     "Type":"string",
+                     "Description":"restaurant id"
+                  },
+                  {
+                     "Name":"name",
+                     "Required":"Y",
+                     "Default":"GANG BANG",
+                     "Type":"string",
+                     "Description":"just a name"
+                  }
+               ]
+            },
+            {
+               "MethodName":"update a meeting",
+               "Synopsis":"This method allows you to create a meeting",
+               "HTTPMethod":"POST",
+               "URI":"/meeting/create",
+               "RequiresOAuth":"N",
+               "parameters":[
+                  {
+                     "Name":"address",
+                     "Required":"Y",
+                     "Type":"string",
+                     "Description":"address"
+                  },
+                  {
+                     "Name":"startDate",
+                     "Required":"Y",
+                     "Type":"string",
+                     "Description":"startDate"
+                  },
+ 				 {
+                     "Name":"endDate",
+                     "Required":"Y",
+                     "Type":"string",
+                     "Description":"endDate"
+                  },
+                  {
+                     "Name":"restaurant_id",
+                     "Required":"Y",
+                     "Default":"42",
+                     "Type":"string",
+                     "Description":"restaurant id"
+                  },
+                  {
+                     "Name":"name",
+                     "Required":"Y",
+                     "Default":"GANG BANG",
+                     "Type":"string",
+                     "Description":"just a name"
+                  }
+               ]
+            },
+            {
+            	"MethodName":"get a meeting",
+               "Synopsis":"This method allows you to get a meeting",
+               "HTTPMethod":"GET",
+               "URI":"/meetings/:meeting_id/read",
+               "RequiresOAuth":"N",
+               "parameters":[
+               {
+               	       "Name":"meeting_id",
+                     "Required":"Y",
+                     "Default":"42",
+                     "Type":"string",
+                     "Description":"meeting id"
+               }]
+            },
+            {
+            	"MethodName":"delete a meeting",
+               "Synopsis":"This method allows you to delete a meeting",
+               "HTTPMethod":"DELETE",
+               "URI":"/meetings/:meeting_id/delete",
+               "RequiresOAuth":"N",
+               "parameters":[
+               {
+               	       "Name":"meeting_id",
+                     "Required":"Y",
+                     "Default":"42",
+                     "Type":"string",
+                     "Description":"meeting id"
+               }]
+            },
+            {
+            	"MethodName":"read a meeting members",
+               "Synopsis":"This method allows you to read memebers of a meeting",
+               "HTTPMethod":"GET",
+               "URI":"/meetings/:meeting_id/members/read",
+               "RequiresOAuth":"N",
+               "parameters":[
+               {
+               	       "Name":"meeting_id",
+                     "Required":"Y",
+                     "Default":"42",
+                     "Type":"string",
+                     "Description":"meeting id"
+               }]
+            },
+            {
+            	"MethodName":"add a user to a meeting",
+               "Synopsis":"This method allows you to add a user to a meeting",
+               "HTTPMethod":"GET",
+               "URI":"/meetings/:meeting_id/members/add/:user_id",
+               "RequiresOAuth":"N",
+               "parameters":[
+               {
+               	       "Name":"meeting_id",
+                     "Required":"Y",
+                     "Default":"42",
+                     "Type":"string",
+                     "Description":"meeting id"
+               },
+               {
+               	       "Name":"user_id",
+                     "Required":"Y",
+                     "Default":"12",
+                     "Type":"string",
+                     "Description":"user id"
+               }
+               ]
+            }      
+      	]
+      },
+      {
+      "name":"Meeting Messages",
+      "methods":
+      [
+      		{
+               "MethodName":"create a message",
+               "Synopsis":"This method allows you to post a message",
+               "HTTPMethod":"POST",
+               "URI":"/meetings/:meeting_id/messages/create",
+               "RequiresOAuth":"N",
+               "parameters":[
+               
+                  {
+                     "Name":"meeting_id",
+                     "Required":"Y",
+                     "Type":"string",
+                     "Description":"the meeting id"
+                  },
+                  {
+                     "Name":"text",
+                     "Required":"Y",
+                     "Type":"string",
+                     "Description":"the message content"
+                  }
+               ]
+            },
+            	{
+               "MethodName":"get all message for a meeting ",
+               "Synopsis":"This method allows you to get all messsage for a meeting",
+               "HTTPMethod":"GET",
+               "URI":"/meetings/:meeting_id/messages/read",
+               "RequiresOAuth":"N",
+               "parameters":[
+               
+                  {
+                     "Name":"meeting_id",
+                     "Required":"Y",
+                     "Type":"string",
+                     "Description":"the meeting id"
+                  }
+               ]
+            }
+            
+      ]
+      },
+          {
+      	"name":"Reservation",
+      	"methods":
+      	[
+      		{
+               "MethodName":"create a reservation",
+               "Synopsis":"This method allows you to create a reservaton",
+               "HTTPMethod":"POST",
+               "URI":"/reservation/create",
+               "RequiresOAuth":"N",
+               "parameters":[
+                  {
+                     "Name":"peopleNumber",
+                     "Required":"Y",
+                     "Type":"string",
+                     "Description":"peopleNumber"
+                  },
+                  {
+                     "Name":"reservationDate",
+                     "Required":"Y",
+                     "Type":"string",
+                     "Description":"reservation date"
+                  },
+                  {
+                     "Name":"restaurant_id",
+                     "Required":"Y",
+                     "Default":"42",
+                     "Type":"string",
+                     "Description":"restaurant id"
+                  },
+                  {
+                     "Name":"name",
+                     "Required":"Y",
+                     "Default":"GANG BANG",
+                     "Type":"string",
+                     "Description":"just a name"
+                  }
+               ]
+            },
+        	{
+               "MethodName":"create a reservation from an existing meeting",
+               "Synopsis":"This method allows you to create a reservaton from an existing meeting",
+               "HTTPMethod":"POST",
+               "URI":"/reservation/create/:meeting_id",
+               "RequiresOAuth":"N",
+               "parameters":[
+                  {
+                     "Name":"peopleNumber",
+                     "Required":"Y",
+                     "Type":"string",
+                     "Description":"peopleNumber"
+                  },
+                  {
+                     "Name":"reservationDate",
+                     "Required":"Y",
+                     "Type":"string",
+                     "Description":"reservation date"
+                  },
+                  {
+                     "Name":"restaurant_id",
+                     "Required":"Y",
+                     "Default":"42",
+                     "Type":"string",
+                     "Description":"restaurant id"
+                  },
+                  {
+                     "Name":"name",
+                     "Required":"Y",
+                     "Default":"GANG BANG",
+                     "Type":"string",
+                     "Description":"just a name"
+                  },
+                  {
+                     "Name":"meeting_id",
+                     "Required":"Y",
+                     "Default":"12",
+                     "Type":"string",
+                     "Description":"meeting id"
+                  }
+               ]
+            },
+            {
+               "MethodName":"update a reservation from an existing meeting",
+               "Synopsis":"This method allows you to create a reservaton from an existing meeting",
+               "HTTPMethod":"PUT",
+               "URI":"/reservation/update/reservation_id",
+               "RequiresOAuth":"N",
+               "parameters":[
+               
+                  {
+                     "Name":"reservation_id",
+                     "Required":"Y",
+                     "Type":"string",
+                     "Description":"the reservation id"
+                  },
+               
+                  {
+                     "Name":"peopleNumber",
+                     "Required":"Y",
+                     "Type":"string",
+                     "Description":"peopleNumber"
+                  },
+                  {
+                     "Name":"reservationDate",
+                     "Required":"Y",
+                     "Type":"string",
+                     "Description":"reservation date"
+                  },
+                  {
+                     "Name":"restaurant_id",
+                     "Required":"Y",
+                     "Default":"42",
+                     "Type":"string",
+                     "Description":"restaurant id"
+                  },
+                  {
+                     "Name":"name",
+                     "Required":"Y",
+                     "Default":"GANG BANG",
+                     "Type":"string",
+                     "Description":"just a name"
+                  },
+                  {
+                     "Name":"meeting_id",
+                     "Required":"Y",
+                     "Default":"12",
+                     "Type":"string",
+                     "Description":"meeting id"
+                  }
+               ]
+            },
+            {
+            	"MethodName":"get all reservations by user",
+               "Synopsis":"This method allows you to get a meeting",
+               "HTTPMethod":"GET",
+               "URI":"/reservations/read",
+               "RequiresOAuth":"N",
+               "parameters":[]
+            },
+            {
+            	"MethodName":"cancel a reservation",
+               "Synopsis":"This method allows you to cancel a reservation",
+               "HTTPMethod":"PUT",
+               "URI":"/reservations/:reservation_id/cancelByOwner",
+               "RequiresOAuth":"N",
+               "parameters":[
+               {
+               	     "Name":"reservation_id",
+                     "Required":"Y",
+                     "Default":"42",
+                     "Type":"string",
+                     "Description":"reservation id"
+               }]
+            }
+             	]
+      },
+  {
+      "name":"Order",
+      "methods":
+      [
+         {
+            "MethodName":"create an order",
+            "Synopsis":"This method allows you to create an order",
+            "HTTPMethod":"POST",
+            "URI":"/orders/create",
+            "RequiresOAUTH":"N",
+            "parameters":[
+               {
+                  "Name":"restaurant_id",
+                  "Required":"Y",
+                  "Default":"42",
+                  "Type":"string",
+                  "Description":"restaurant where you make the order"
+               },
+               {
+                  "Name":"date",
+                  "Required":"Y",
+                  "Default":"05-31-2014 09:00:00",
+                  "Type":"string",
+                  "Description":"date you create the order"
+               }
+            ]
+         },
+         {
+            "MethodName":"validate an order by the owner",
+            "Synopsis":"This method allows the owner to validate an order",
+            "HTTPMethod":"PUT",
+            "URI":"/orders/validateByOwner",
+            "RequiresOAUTH":"N",
+            "parameters":[
+               {
+                  "Name":"order_id",
+                  "Required":"Y",
+                  "Default":"42",
+                  "Type":"string",
+                  "Description":"order id"
+               }
+            ]
+         },
+         {
+            "MethodName":"read all orders on db",
+            "Synopsis":"This method allows you to read all orders on db",
+            "HTTPMethod":"GET",
+            "URI":"/orders/read",
+            "RequiresOAUTH":"N",
+            "parameters":[]
+         },
+         {
+            "MethodName":"read a specific orders",
+            "Synopsis":"This method allows you to read a specific orders on db",
+            "HTTPMethod":"GET",
+            "URI":"/orders/read/:order_id",
+            "RequiresOAUTH":"N",
+            "parameters":[
+               {
+                 "Name":"order_id",
+                  "Required":"Y",
+                  "Default":"42",
+                  "Type":"string",
+                  "Description":"order id" 
+               }
+            ]
+         }
+      ]
+   }, 
+   {
+      "name":"OrderLine",
+      "methods":
+      [
+       {
+            "MethodName":"create an orderLine for an order",
+            "Synopsis":"This method allows you to create an orderLine for an order",
+            "HTTPMethod":"POST",
+            "URI":"/order_lines/createForOrder",
+            "RequiresOAUTH":"N",
+            "parameters":[
+               {
+                  "Name":"quantity",
+                  "Required":"Y",
+                  "Default":"8",
+                  "Type":"string",
+                  "Description":"Number of dish"
+               },
+               {
+                  "Name":"order_id",
+                  "Required":"Y",
+                  "Default":"42",
+                  "Type":"string",
+                  "Description":"order id associate to the orderLine"
+               },
+               {
+                  "Name":"dish_id",
+                  "Required":"Y",
+                  "Default":"42",
+                  "Type":"string",
+                  "Description":"dish id associate to orderLine"
+               }
+            ]
+         },
+         {
+            "MethodName":"delete an orderLine",
+            "Synopsis":"This method allows you to delete an orderLine",
+            "HTTPMethod":"DELETE",
+            "URI":"/order_lines/delete/:orderLine_id",
+            "RequiresOAUTH":"N",
+            "parameters":[
+               {
+                  "Name":"orderLine_id",
+                  "Required":"Y",
+                  "Default":"1",
+                  "Type":"string",
+                  "Description":"orderLine id"
+               }
+            ]
+         },
+         {
+            "MethodName":"update an orderLine",
+            "Synopsis":"This method allows you to update an orderLine",
+            "HTTPMethod":"PUT",
+            "URI":"/order_lines/update/:orderLine_id",
+            "RequiresOAUTH":"N",
+            "parameters":[
+               {
+                  "Name":"orderLine_id",
+                  "Required":"Y",
+                  "Default":"1",
+                  "Type":"string",
+                  "Description":"orderLine id"
+               },
+               {
+                  "Name":"quantity",
+                  "Required":"Y",
+                  "Default":"3",
+                  "Type":"string",
+                  "Description":"Number of dish"
+               },
+               {
+                  "Name":"order_id",
+                  "Required":"Y",
+                  "Default":"7",
+                  "Type":"string",
+                  "Description":"order id associate to the orderLine"
+               },
+               {
+                  "Name":"dish_id",
+                  "Required":"Y",
+                  "Default":"21",
+                  "Type":"string",
+                  "Description":"dish id associate to orderLine"
+               }
+            ]
+         },
+         {
+            "MethodName":"read orderLines associate to an order",
+            "Synopsis":"This method allows you read orderLines associate to an order",
+            "HTTPMethod":"GET",
+            "URI":"/order_lines/read/:order_id",
+            "RequiresOAUTH":"N",
+            "parameters":[
+               {
+                  "Name":"order_id",
+                  "Required":"Y",
+                  "Default":"1",
+                  "Type":"string",
+                  "Description":"order id"
+               }
+            ]
+         }
+      ]
+   }
+   ]
+}
+

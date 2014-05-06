@@ -53,3 +53,34 @@ exports.removeOpeningDayByDOW = function(req, res, next)
 		res.redirect('/TOCOMPLETE');
 	});
 }
+
+exports.getRestaurants = function(req, res, next)
+{
+	req.db.models.restaurant.find({}, function(err, restaurants)
+	{
+		if (err)
+			res.send(err);
+		res.send(restaurants);
+	});
+}
+
+exports.getOneRestaurant = function(req, res, next)
+{
+	req.db.models.restaurant.get(req.params.re, function(err, restaurants)
+	{
+		if (err)
+			res.send(err);
+		res.send(restaurants);
+	});
+}
+
+exports.restaurantsByCategory = function(req, res, next)
+{
+	var category = req.body.category;
+req.db.models.restaurant.find({category: category}, function(err, restaurants)
+	{
+		if (err)
+			res.send(err);
+		res.send(restaurants);
+	});
+}
