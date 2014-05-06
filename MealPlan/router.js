@@ -66,12 +66,15 @@ exports.myRouter = function(app)
 	app.get('/order_lines/read/:order_id', authAndLoadUser, order_lines.readForOrder);
 
 	// RESERVATION
-	app.post('/reservation/create', authAndLoadUser, reservations.create);
-	app.post('/reservation/create/:meeting_id', authAndLoadUser, loadMeeting, reservations.createFromMeeting);
-	app.put('/reservation/update/:reservation_id', authAndLoadUser, loadReservation, reservations.update);
-	app.post('/reservation/:reservation_id/validateByRestaurant', authAndLoadRestaurant, reservations.validateByRestaurant);
-	app.put('/reservation/:reservation_id/cancelByOwner', authAndLoadUser, loadReservation, reservations.cancelByOwner);
-	app.put('/reservation/:reservation_id/cancelByRestaurant', authAndLoadRestaurant, loadReservation, reservations.cancelByRestaurant);
+	app.post('/reservations/create', authAndLoadUser, reservations.create);
+	app.post('/reservations/create/:meeting_id', authAndLoadUser, loadMeeting, reservations.create);
+	app.put('/reservations/update/:reservation_id', authAndLoadUser, loadReservation, reservations.update);
+	app.put('/reservations/:reservation_id/cancelByOwner', authAndLoadUser, loadReservation, reservations.cancelByOwner);
+	app.get('/reservations/read', authAndLoadUser, reservations.readByUser);
+
+	app.post('/reservations/:reservation_id/validateByRestaurant', authAndLoadRestaurant, reservations.validateByRestaurant);
+	app.put('/reservations/:reservation_id/cancelByRestaurant', authAndLoadRestaurant, loadReservation, reservations.cancelByRestaurant);
+
 }
 
 // This is a middleware. To use for routes  that needs a user logged-in
@@ -115,7 +118,7 @@ authAndLoadRestaurant = function(req, res, next)
 		{
 			if (!restaurant)
 			{
-				res.render('login', { "errorMessage" : "Invalid username" });
+				res.render('login', { "errorMessage" : "In  valid username" });
 				return ;
 			}
 			if (restaurant.password != password)

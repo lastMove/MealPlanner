@@ -6,6 +6,7 @@ exports.create = function(req, res, next)
 	var startDate = req.body.startDate;
 	var endDate = req.body.endDate;
 	var restaurant_id = req.body.restaurant_id ? req.body.restaurant_id : 0;
+	var name =req.body.name;
 
 	req.db.models.meeting.create(
 	{
@@ -13,7 +14,8 @@ exports.create = function(req, res, next)
 		startDate:startDate,
 		endDate: endDate,
 		restaurant_id: restaurant_id,
-		owner_id : req.user.id
+		owner_id : req.user.id,
+		name : req.body.name
 	}, function(err, meeting)
 	{
 		if (err)
@@ -34,6 +36,8 @@ exports.update = function(req, res, next)
 	var startDate = req.body.startDate;
 	var endDate = req.body.endDate;
 	var restaurant_id = req.body.restaurant_id ? req.body.restaurant_id : 0;
+	var name = req.body.name;
+
 	if (address)
 		req.meeting.address = address;
 	if (startDate)
@@ -42,6 +46,8 @@ exports.update = function(req, res, next)
 		req.meeting.endDate = new Date(endDate);
 	if (restaurant_id)
 		req.meeting.restaurant_id = restaurant_id;
+	if (name)
+		req.meeting.name = name;
 	req.meeting.save(function(err, meeting)
 	{	
 		if (err)

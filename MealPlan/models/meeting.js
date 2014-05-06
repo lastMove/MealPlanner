@@ -5,6 +5,7 @@ module.exports = function(db, cb)
 		startDate : {type:"date", time:true},
 		endDate : {type:"date", time:true},
 		address : String,
+		name : String,
 		validation : Boolean
 	});
 }

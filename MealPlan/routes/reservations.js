@@ -1,17 +1,20 @@
 var newErr = require('../error').newError;
 
-exports.createFromMeeting = function(req, res, next)
+exports.create = function(req, res, next)
 {
 	var name = req.body.name;
 	var peopleNumber = req.body.peopleNumber;
-
+	var restaurantId = req.body.restaurant_id ? req.body.restaurant_id : 0;
+	var reservationDate = req.body.reservationDate;
+	var meetingId = req.meeting ? req.meeting.id : 0;
 	req.db.models.reservation.create(
 	{
 		name: name,
 		peopleNumber : peopleNumber,
-		meeting_id : req.meeting.id,
+		meeting_id : meetingId,
 		owner_id : req.user.id,
-		restaurant_id : req.meeting.restaurant_id
+		restaurant_id :restaurantId,
+		reservationDate : reservationDate
 	}, function(err, reservation)
 	{
 		if (err)
@@ -30,25 +33,7 @@ exports.readByUser = function(req, res, next)
 	});
 }
 
-exports.create = function(req, res, next)
-{
-
-	var name = req.body.name;
-	var peopleNumber = req.body.peopleNumber;
-	var restaurantId = req.body.restaurant_id;
-	req.db.models.reservation.create(
-	{
-		name: name,
-		peopleNumber : peopleNumber,
-		owner_id : req.user.id,
-		restaurant_id :restaurantId
-	}, function(err, reservation)
-	{
-		if (err)
-			next(newErr(500, err));
-		res.send(reservation);
-	});
-}
+export
 
 exports.update = function(req, res, next)
 {
