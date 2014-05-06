@@ -14,8 +14,21 @@ html
 					h3.panel-title Openning Days
 				div.day-choice
 					div.day-list
-						each v, i in restaurant.openningDays
-							span.bold= i
+						span.bold Monday
+							//input(type="text" data-time-format="H:i:s" id="mondayPicker" class="time ui-timepicker-input" autocomplete="off")
+
+						span.bold Tuesday
+
+						span.bold Wednesday
+
+						span.bold Thursday
+
+						span.bold Friday
+
+						span.bold Saturday
+
+						span.bold Sunday
+						each v, i in restaurant.restaurants
 							if v == "true"
 								input.checkbox-day(type="checkbox", name=i, checked="checked")
 							else
@@ -47,3 +60,5 @@ html
 	include include/footer
 	script(src="/public/js/jQuery/jquery-2.1.1.js")
 	script(src="/public/js/bootstrap-3.1.1-dist/js/bootstrap.min.js")
+	script(src="/public/js/jquery-timepicker/jquery.timepicker.min.js")
+	script $('#mondayPicker').timepicker();
