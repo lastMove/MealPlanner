@@ -55,6 +55,76 @@ exports.signUp = function(req, res, next)
 		res.redirect('/webApp');
 	});
 }
+
+exports.createDish = function(req, res, next)
+{
+	var name = req.body.name;
+	var description = req.body.description;
+	var price = req.body.price;
+
+	req.db.models.dish.create(
+	{
+		name : name,
+		description : description,
+		price : price,
+		restaurant_id : req.restaurant.id
+	}, function(err, dish)
+	{
+		if (err)
+			res.redirect('/webApp/dishes?result=failure');
+		else
+			res.redirect('/webApp/dishes?result=success');
+	});
+}
+
+exports.deleteDish = function(req, res, next)
+{
+	var id = req.params.dish_id;
+
+	req.db.models.dish.find({
+		id : id
+	}).remove(function(err, dish)
+	{
+		if (err)
+			res.redirect('/webApp/dishes?modifResult=failureDelete');
+		else
+			res.redirect('/webApp/dishes?modifResult=successDelete');
+	});
+}
+
+exports.updateDish = function(req, res, next)
+{
+	var name = req.body.name;
+	var description = req.body.description;
+	var price = req.body.price;
+	var id = req.params.dish_id;
+
+	req.db.models.dish.get(id, function(err, dish)
+	{
+		dish.save(
+		{
+			name : name,
+			description : description,
+			price : price
+		}, function(err, dish)
+		{
+			if (err)
+				res.redirect('/webApp/dishes?modifResult=failureUpdate');
+			else
+				res.redirect('/webApp/dishes?modifResult=successUpdate');
+		})
+	})
+}
+
+exports.updateDishPage = function(req, res, next)
+{
+	var id = req.params.dish_id;
+	var dish = req.db.models.dish.get(id, function(err, dish)
+	{
+		res.render('updateDish', { dish: dish });
+	});
+}
+
 exports.loginPage = function(req, res, next)
 {
 	res.render('login');
@@ -66,27 +136,16 @@ exports.signUpPage = function(req, res, next)
 }
 exports.dishesPage = function(req, res, next)
 {
-	req.restaurant.getDishes(function(err, dishes)
-	{
-		if (err)
-		{
-			res.render('error', {err: error});
-		}
-	res.render('meals', {restaurant: req.restaurant, dishes: dishes});
-	});
+	res.render('meals', {restaurant: req.restaurant, result: req.query.result, modifResult: req.query.modifResult});
 }
 
 exports.optionsPage = function(req, res, next)
 {
+	console.log(JSON.stringify(req.restaurant, undefined, 4));
 	res.render('options', {restaurant: req.restaurant});
 }
 
-
 exports.reservationPage = function(req, res, next)
 {
-	console.log(JSON.stringify(req.restaurant, undefined, 4));
-	console.log(JSON.stringify(" "));
-	console.log(JSON.stringify(req.reservation, undefined, 4));
-	res.render('reservation', {restaurant : req.restaurant, reservation : req.reservation});
+	res.render('reservation', {reservation : req.reservation});
 }
-

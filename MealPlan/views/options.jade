@@ -14,7 +14,7 @@ html
 					h3.panel-title Openning Days
 				div.day-choice
 					div.day-list
-						each v, i in openningDays
+						each v, i in restaurant.openningDays
 							span.bold= i
 							if v == "true"
 								input.checkbox-day(type="checkbox", name=i, checked="checked")
@@ -45,5 +45,5 @@ html
 									button(class="btn btn-warning" type="submit"  style="width:155px;") Change Password
 
 	include include/footer
-	script(src="../public/js/jQuery/jquery-2.1.1.js")
-	script(src="../public/js/bootstrap-3.1.1-dist/js/bootstrap.min.js")
+	script(src="/public/js/jQuery/jquery-2.1.1.js")
+	script(src="/public/js/bootstrap-3.1.1-dist/js/bootstrap.min.js")

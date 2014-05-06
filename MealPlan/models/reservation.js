@@ -5,8 +5,8 @@ module.exports = function(db, cb)
 		name : String,
 		peopleNumber : Number,
 		kind : String,
-		creationDate : { type: "date", time: true },
-		reservationDate : {type : "date", time: true},
+		date : { type: "date", time: true },
+		//reservationDate : {type : "date", time: true},
 		validationStatus : ["validateByRestaurant", "cancelledByUser", "cancelledByRestaurant", "none"],
 	},
 	{
@@ -16,7 +16,7 @@ module.exports = function(db, cb)
 			{
 				this.date = new Date();
 				this.validationStatus = "none";
-				this.creationDate = new Date();
+				this.date = new Date();
 				next();
 			}
 		}

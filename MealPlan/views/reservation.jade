@@ -1,18 +1,14 @@
 doctype html
 html
 	head
-		link(rel="stylesheet", href="../../public/js/bootstrap-3.1.1-dist/css/bootstrap.min.css")
-		link(rel="stylesheet", href="../../public/js/bootstrap-3.1.1-dist/css/bootstrap-theme.min.css")
-		link(rel="stylesheet", href="../../public/js/bootstrap-3.1.1-dist/css/sticky-footer-navbar.css")
-		link(rel="stylesheet" type="text/css" href="../../public/js/dataTables-1.10.0/media/css/jquery.dataTables.css")
-		link(rel="stylesheet", href="../../public/stylesheets/style.css")
+		include include/meta
 		title= "Meal Planner - Reservation"
 
 	body(role="document")
 		include include/menu
 		div.container.theme-showcase(role="main")
 			include include/title
-			h2 #{restaurant.name} - Reservation
+			h2 #{reservation.restaurant.name} - Reservation
 			div.panel.panel-info
 				div.panel-heading
 					h3.panel-title Informations
@@ -45,7 +41,7 @@ html
 
 			div.panel.panel-warning
 				div.panel-heading.head-panel-tab
-					h3.panel-title Meal list
+					h3.panel-title Dishes list
 				table#table_id.display
 					thead
 						tr
@@ -53,22 +49,23 @@ html
 							th Description
 							th Price
 					tbody
-						if order
-							each i in order
-								tr
-									td= i.name
-									td= i.description
-									td= i.price
+						if reservation.order
+							if reservation.order.orderLines
+									each i in reservation.order.orderLines
+										tr
+											td= i.dish.name
+											td= i.dish.description
+											td= i.dish.price + " €"
 
 			p
 			case reservation.validationStatus
 				when "validateByRestaurant"
 					button(class="btn btn-lg btn-danger" action="acceptButtonAction") Cancel Reservation
 				when "none"
-					button(class="btn btn-lg btn-primary" action="acceptButtonAction") Accept Reservation			
-		
+					button(class="btn btn-lg btn-primary" action="acceptButtonAction") Accept Reservation
+
 	include include/footer
-	script(src="../../public/js/jQuery/jquery-2.1.1.js")
-	script(src="../../public/js/bootstrap-3.1.1-dist/js/bootstrap.min.js")
-	script(type="text/javascript" charset="utf8" src="../../public/js/dataTables-1.10.0/media/js/jquery.dataTables.js")
+	script(src="/public/js/jQuery/jquery-2.1.1.js")
+	script(src="/public/js/bootstrap-3.1.1-dist/js/bootstrap.min.js")
+	script(type="text/javascript" charset="utf8" src="/public/js/dataTables-1.10.0/media/js/jquery.dataTables.js")
 	script $(document).ready( function () { $('#table_id').DataTable(); } );

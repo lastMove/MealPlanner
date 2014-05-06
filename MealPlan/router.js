@@ -20,13 +20,18 @@ exports.myRouter = function(app)
 	// WEBAPP
 	app.get('/webApp', authAndLoadRestaurant, webapp.indexPage);
 	app.get('/webApp/signup', webapp.signUpPage);
+	app.post('/webApp/signup', webapp.signUp);
 	app.get('/webApp/login', webapp.loginPage);
 	app.get('/webApp/reservation/:reservation_id', authAndLoadRestaurant, loadReservation, webapp.reservationPage);
 	app.get('/webApp/dishes', authAndLoadRestaurant, webapp.dishesPage);
+	app.post('/webApp/dishes/create', authAndLoadRestaurant, webapp.createDish);
+	app.post('/webApp/dishes/delete/:dish_id', authAndLoadRestaurant, webapp.deleteDish);
+	app.get('/webApp/dishes/update/:dish_id', authAndLoadRestaurant, webapp.updateDishPage);
+	app.post('/webApp/dishes/update/:dish_id', authAndLoadRestaurant, webapp.updateDish);
 	app.get('/webApp/options', authAndLoadRestaurant, webapp.optionsPage);
 	app.post('/webApp/login', webapp.login);
 	app.get('/webApp/logout', webapp.logout);
-	app.post('/webApp/signup', webapp.signUp);
+
 	// USERS
 	app.get('/auth', authAndLoadUser, users.auth);
 	app.post('/users/create', users.createUser);
