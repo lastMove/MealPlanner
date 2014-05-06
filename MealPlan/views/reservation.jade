@@ -1,14 +1,18 @@
 doctype html
 html
 	head
-		include include/meta
+		link(rel="stylesheet", href="../../public/js/bootstrap-3.1.1-dist/css/bootstrap.min.css")
+		link(rel="stylesheet", href="../../public/js/bootstrap-3.1.1-dist/css/bootstrap-theme.min.css")
+		link(rel="stylesheet", href="../../public/js/bootstrap-3.1.1-dist/css/sticky-footer-navbar.css")
+		link(rel="stylesheet" type="text/css" href="../../public/js/dataTables-1.10.0/media/css/jquery.dataTables.css")
+		link(rel="stylesheet", href="../../public/stylesheets/style.css")
 		title= "Meal Planner - Reservation"
 
 	body(role="document")
 		include include/menu
 		div.container.theme-showcase(role="main")
 			include include/title
-			h2 #{restaurantName} - Reservation
+			h2 #{restaurant.name} - Reservation
 			div.panel.panel-info
 				div.panel-heading
 					h3.panel-title Informations
@@ -16,24 +20,28 @@ html
 					tbody
 						tr
 							td.td-title Name :
-							td #{name}
+							td #{reservation.name}
+						tr
+							td.td-title Owner :
+							td #{reservation.owner.userName}
 						tr
 							td.td-title Date :
-							td #{date}
-						tr
-							td.td-title Hour :
-							td #{hour}
+							td #{reservation.date}
 						tr
 							td.td-title Number of seat :
-							td #{seat}
+							td #{reservation.peopleNumber}
 						tr
 							td.td-title Accepted :
-							if accepted == "true"
-								td 
-									span.label.label-success Yes
-							else
-								td 
-									span.label.label-danger No
+							case reservation.validationStatus
+								when "validateByRestaurant"
+									td 
+										span.label.label-success Yes
+								when "cancelledByUser"
+									td 
+										span.label.label-warning Cancelled
+								when  "none"
+									td 
+										span.label.label-danger No
 
 			div.panel.panel-warning
 				div.panel-heading.head-panel-tab
@@ -45,21 +53,22 @@ html
 							th Description
 							th Price
 					tbody
-						each i in mealList
-							tr
-								td= i.name
-								td= i.description
-								td= i.price
+						if order
+							each i in order
+								tr
+									td= i.name
+									td= i.description
+									td= i.price
 
 			p
-			if accepted == "true"
-				button(class="btn btn-lg btn-danger" action="acceptButtonAction") Cancel Reservation
-			else
-				button(class="btn btn-lg btn-primary" action="acceptButtonAction") Accept Reservation
-			
+			case reservation.validationStatus
+				when "validateByRestaurant"
+					button(class="btn btn-lg btn-danger" action="acceptButtonAction") Cancel Reservation
+				when "none"
+					button(class="btn btn-lg btn-primary" action="acceptButtonAction") Accept Reservation			
 		
 	include include/footer
-	script(src="../public/js/jQuery/jquery-2.1.1.js")
-	script(src="../public/js/bootstrap-3.1.1-dist/js/bootstrap.min.js")
-	script(type="text/javascript" charset="utf8" src="../public/js/dataTables-1.10.0/media/js/jquery.dataTables.js")
+	script(src="../../public/js/jQuery/jquery-2.1.1.js")
+	script(src="../../public/js/bootstrap-3.1.1-dist/js/bootstrap.min.js")
+	script(type="text/javascript" charset="utf8" src="../../public/js/dataTables-1.10.0/media/js/jquery.dataTables.js")
 	script $(document).ready( function () { $('#table_id').DataTable(); } );

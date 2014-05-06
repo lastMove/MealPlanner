@@ -5,7 +5,7 @@ exports.indexPage = function(req, res, next)
 	// 1 Restaurant Name
 	req.restaurant.getReservations(function(err, reservations)
 	{
-		console.log(JSON.stringify(req.restaurant));
+		console.log(JSON.stringify(req.restaurant, undefined, 4));
 		if (err)
 			next(newErr(err));
 		res.render('mainpage', {
@@ -84,9 +84,9 @@ exports.optionsPage = function(req, res, next)
 
 exports.reservationPage = function(req, res, next)
 {
-	req.reservation.getOrder(function(err, order)
-	{
-		res.render('reservation', {restaurant : req.restaurant, reservation : req.reservation, order : order});
-	})
+	console.log(JSON.stringify(req.restaurant, undefined, 4));
+	console.log(JSON.stringify(" "));
+	console.log(JSON.stringify(req.reservation, undefined, 4));
+	res.render('reservation', {restaurant : req.restaurant, reservation : req.reservation});
 }
 
