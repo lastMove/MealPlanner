@@ -18,12 +18,14 @@ exports.myRouter = function(app)
 		});
 
 	// WEBAPP
-	app.get('/webApp/main', authAndLoadRestaurant, webapp.indexPage);
+	app.get('/webApp', authAndLoadRestaurant, webapp.indexPage);
 	app.get('/webApp/signup', webapp.signUpPage);
 	app.get('/webApp/login', webapp.loginPage);
+	app.get('/webApp/reservation/:reservation_id', authAndLoadRestaurant, loadReservation, webapp.reservationPage);
 	app.get('/webApp/dishes', authAndLoadRestaurant, webapp.dishesPage);
 	app.get('/webApp/options', authAndLoadRestaurant, webapp.optionsPage);
 	app.post('/webApp/login', webapp.login);
+	app.get('/webApp/logout', webapp.logout);
 	app.post('/webApp/signup', webapp.signUp);
 	// USERS
 	app.get('/auth', authAndLoadUser, users.auth);
@@ -47,9 +49,6 @@ exports.myRouter = function(app)
 	// MESSAGES (MEETINGS)
 	app.get('/meetings/:meeting_id/messages/read', authAndLoadUser, loadMeeting, messages.readAll);
 	app.post('/meetings/:meeting_id/messages/create', authAndLoadUser, loadMeeting, messages.create);
-
-	// RESTAURANT
-	app.post('/restaurants/login', authAndLoadRestaurant, webapp.login);
 
 	//ORDER
 	app.post('/orders/create', authAndLoadUser, orders.create);
@@ -147,7 +146,7 @@ loadMeeting = function(req, res, next)
 
 loadReservation = function(req, res,next)
 {
-	req.db.models.meeting.get(req.params.reservation_id, function (err, meeting)
+	req.db.models.reservation.get(req.params.reservation_id, function (err, reservation)
 	{
 		if (err)
 		{
@@ -155,7 +154,7 @@ loadReservation = function(req, res,next)
 			res.send(500, err);
 			return ;
 		}
-		req.meeting = meeting;
+		req.reservation = reservation;
 		next();
 	});
 }

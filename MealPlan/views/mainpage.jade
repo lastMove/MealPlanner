@@ -8,32 +8,35 @@ html
 		include include/menu
 		div.container.theme-showcase(role="main")
 			include include/title
-			h2 #{restaurant.userName}
+			h2 #{restaurant.name}
 			div.panel.panel-info
 				div.panel-heading.head-panel-tab
 					h3.panel-title List of Reservations
 				table#table_id.display
 					thead
 						tr
-							th Name 
+							th Reservation Name 
 							th Date
-							th Hour
 							th Number of seats
 							th Accepted
 					tbody
-						each i in reservationList
-							tr
-								td
-									a(href="#") #{i.name}
-								td= i.date
-								td= i.hour
-								td= i.seat
-								if i.accepted == "true"
-									td 
-										span.label.label-success Yes
-								else
-									td 
-										span.label.label-danger No
+						if restaurant.reservations
+							each i in restaurant.reservations
+								tr
+									td
+										a(href="/webapp/reservation/" + i.id) #{i.name}
+									td= i.date
+									td= i.peopleNumber
+									case i.validationStatus
+										when "validateByRestaurant"
+											td 
+												span.label.label-success Yes
+										when "cancelledByUser"
+											td 
+												span.label.label-warning Cancelled
+										when  "none"
+											td 
+												span.label.label-danger No
 		
 	include include/footer
 	script(src="../public/js/jQuery/jquery-2.1.1.js")
