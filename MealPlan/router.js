@@ -73,6 +73,10 @@ exports.myRouter = function(app)
 
 	app.post('/reservations/:reservation_id/validateByRestaurant', authAndLoadRestaurant, reservations.validateByRestaurant);
 	app.put('/reservations/:reservation_id/cancelByRestaurant', authAndLoadRestaurant, loadReservation, reservations.cancelByRestaurant);
+	// Restaurants
+	app.get('/restaurants/read', authAndLoadUser, restaurants.getRestaurants);
+	app.get('/restaurants/read/:restaurant_id', authAndLoadUser, restaurants.getOneRestaurant);
+	app.get('/restaurants/category/:category/read', authAndLoadUser, restaurants.restaurantsByCategory);
 
 }
 
