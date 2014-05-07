@@ -30,7 +30,7 @@ module.exports = function(db, cb)
     var Restaurant = db.models.restaurant;
     var OpeningDay = db.models.openingDay;
 
-    OpeningDay.hasOne('restaurant', Restaurant, {reverse : "restaurants", autoFetch : true});
+    OpeningDay.hasOne('restaurant', Restaurant, {reverse : "restaurants", autoFetch : false});
 
     Message.hasOne("sender", User, {reverse : "messages"});
     Message.hasOne("meetings", Meeting, {reverse : "messages"});

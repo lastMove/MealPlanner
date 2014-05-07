@@ -11,54 +11,64 @@ html
 			h2 Options
 			div.panel.panel-default
 				div.panel-heading
-					h3.panel-title Openning Days
-				div.day-choice
-					div.day-list
-						span.bold Monday
-							//input(type="text" data-time-format="H:i:s" id="mondayPicker" class="time ui-timepicker-input" autocomplete="off")
+					h3.panel-title Opening Days
+				table.display#table_id
+					thead
+						tr
+							th Day
+							th Opening Hour
+							th Closing Hour
+							th Update
+							th Delete
+					tbody
+						if openingDays
+							each i in openingDays
+								tr
+									td= i.dow
+									td= i.openTime
+									td= i.closeTime
+									td(style="width:80px;")
+										form(method="get" action="/webApp/openingDay/update/" + i.id)
+											button(class="btn btn-warning btn-xs" style="width:80px;") Update
+									td(style="width:80px;")
+										form(method="post" action="/webApp/openingDay/delete/" + i.id)
+											button(class="btn btn-danger btn-xs" style="width:80px;") Delete
 
-						span.bold Tuesday
-
-						span.bold Wednesday
-
-						span.bold Thursday
-
-						span.bold Friday
-
-						span.bold Saturday
-
-						span.bold Sunday
-						each v, i in restaurant.restaurants
-							if v == "true"
-								input.checkbox-day(type="checkbox", name=i, checked="checked")
-							else
-								input.checkbox-day(type="checkbox", name=i)
-					button(class="btn btn-default", action="changeDays") Save Openning Days
 			div.panel.panel-warning
 				div.panel-heading
 					h3.panel-title Change password
-				form(role="form")
+				form(role="form" method="post" action="/webApp/options/changePassword")
 					table.panel-table
 						tbody
 							tr
 								td.td-title Old password :
 								td 
-									input(type="password" name="oldPass" required="")
+									input(type="password" name="oldPassword" required="")
 							tr
 								td.td-title New password :
 								td 
-									input(type="password" name="newPass" required="")
+									input(type="password" name="newPassword" required="")
 							tr
 								td.td-title New password (verification) :
 								td 
-									input(type="password" name="verifPass" required="" data-equals="password")
+									input(type="password" name="reNewPasword" required="")
 							tr
 								td
 								td
 									button(class="btn btn-warning" type="submit"  style="width:155px;") Change Password
+			if changePass
+				case changePass
+					when "success"
+						div.alert.alert-success(style="margin:auto;margin-bottom:20px;")
+							p Password has successfuly been changed !
+					when "failure"
+						div.alert.alert-danger(style="margin:auto;margin-bottom:20px;")
+							p Error : please verify your informations
 
 	include include/footer
 	script(src="/public/js/jQuery/jquery-2.1.1.js")
 	script(src="/public/js/bootstrap-3.1.1-dist/js/bootstrap.min.js")
-	script(src="/public/js/jquery-timepicker/jquery.timepicker.min.js")
-	script $('#mondayPicker').timepicker();
+	//script(src="/public/js/jquery-timepicker/jquery.timepicker.min.js")
+	//script $('#mondayPicker').timepicker();
+	script(type="text/javascript" charset="utf8" src="../public/js/dataTables-1.10.0/media/js/jquery.dataTables.js")
+	script $(document).ready( function () { $('#table_id').DataTable(); } );

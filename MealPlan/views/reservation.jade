@@ -49,13 +49,12 @@ html
 							th Description
 							th Price
 					tbody
-						if reservation.order
-							if reservation.order.orderLines
-									each i in reservation.order.orderLines
-										tr
-											td= i.dish.name
-											td= i.dish.description
-											td= i.dish.price + " €"
+						if orderline
+							each i in orderline
+								tr
+									td= i.dish.name
+									td= i.dish.description
+									td= i.dish.price + " €"
 
 			p
 			case reservation.validationStatus

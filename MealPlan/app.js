@@ -19,7 +19,7 @@ var router = require('./router').myRouter;
 orm.settings.set("connection.debug", true);
 orm.settings.set("instance.cache", false);
 orm.settings.set("instance.autoFetch", true);
-orm.settings.set("instance.autoFetchLimit", 3);
+orm.settings.set("instance.autoFetchLimit", 1);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -32,6 +32,7 @@ app.use(cookieParser());
 app.use(session({ secret: 'whatever', store: store}));
 
 app.use(orm.express({
+    "password" : "root",
     "host"     : "localhost",
     "database" : "mealPlan",
     "protocol" : "mysql"

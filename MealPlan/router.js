@@ -29,8 +29,10 @@ exports.myRouter = function(app)
 	app.get('/webApp/dishes/update/:dish_id', authAndLoadRestaurant, webapp.updateDishPage);
 	app.post('/webApp/dishes/update/:dish_id', authAndLoadRestaurant, webapp.updateDish);
 	app.get('/webApp/options', authAndLoadRestaurant, webapp.optionsPage);
+	app.post('/webApp/options/changePassword', authAndLoadRestaurant, webapp.changePassword);
 	app.post('/webApp/login', webapp.login);
 	app.get('/webApp/logout', webapp.logout);
+	app.get('/webApp/openingDay/update/:openingDay_id', authAndLoadRestaurant, webapp.openingDayPage)
 
 	// USERS
 	app.get('/auth', authAndLoadUser, users.auth);

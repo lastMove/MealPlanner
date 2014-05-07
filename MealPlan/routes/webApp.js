@@ -1,4 +1,5 @@
 var newErr = require('../error').newError;
+var orm = require('orm');
 
 exports.indexPage = function(req, res, next)
 {
@@ -136,18 +137,70 @@ exports.signUpPage = function(req, res, next)
 }
 exports.dishesPage = function(req, res, next)
 {
-	res.render('meals', {restaurant: req.restaurant, result: req.query.result, modifResult: req.query.modifResult});
+	req.db.models.dish.find({restaurant_id : req.restaurant.id}, function(err, dishes)
+	{
+		if (err)
+			res.render('error', {
+			message: err.message,
+			error: err});
+		else
+			res.render('meals', {restaurant: req.restaurant, 
+				dishes: dishes,
+				result: req.query.result, 
+				modifResult: req.query.modifResult});
+	})
 }
 
 exports.optionsPage = function(req, res, next)
 {
-	console.log(JSON.stringify(req.restaurant, undefined, 4));
-	res.render('options', {restaurant: req.restaurant});
+	req.db.models.openingDay.find({restaurant_id: req.restaurant.id}, function(err, openingDays)
+	{
+		if (err)
+			res.render('error', {
+			message: err.message,
+			error: err
+		});
+		else
+			{
+				console.log(JSON.stringify(openingDays, undefined, 4));
+				res.render('options', {restaurant: req.restaurant, 
+					openingDays: openingDays,
+					changePass: req.query.changePass});
+			}		
+	});
 }
 
 exports.reservationPage = function(req, res, next)
 {
-	res.render('reservation', {reservation : req.reservation});
+	if (req.reservation.order)
+		req.db.models.orderLine.find({order_id: req.reservation.order.id}, function(err, orderline)
+		{
+			if (err)
+				res.render('error', {
+				message: err.message,
+				error: err
+			});
+			else
+				res.render('reservation', {reservation : req.reservation, orderline : orderline});
+		});
+	else
+		res.render('reservation', {reservation : req.reservation, orderline : null});
+}
+
+exports.openingDayPage = function(req, res, next)
+{
+	var id = req.params.openingDay_id;
+
+	req.db.models.openingDay.get(id, function(err, openingDay)
+	{
+		if (err)
+			res.render('error', {
+			message: err.message,
+			error: err
+			});
+		else
+			res.render('openingDay', {openingDay : openingDay});
+	});
 }
 
 exports.changePassword = function(req, res, next)
@@ -160,22 +213,23 @@ exports.changePassword = function(req, res, next)
 	{
 		req.db.models.restaurant.one({ userName : req.restaurant.userName}, function(err, restaurant){
 			if (err)
-				res.redirect('/webApp/option?changePass=failure');
+				res.redirect('/webApp/options?changePass=failure');
 			else
 			{
 				restaurant.password = newPassword;
 				restaurant.save(function(err, restaurant){
 					if (err)
-						res.redirect('/webApp/option?changePass=failure');
+						res.redirect('/webApp/options?changePass=failure');
 					else
 					{
+						req.session.password = newPassword;
 						req.restaurant = restaurant;
-						res.redirect('/webApp/option?changePass=succes');
+						res.redirect('/webApp/options?changePass=success');
 					}
 				});
 			}
 		});
 	}
 	else
-		res.redirect('/webApp/option?changePass=failure');
+		res.redirect('/webApp/options?changePass=failure');
 }
