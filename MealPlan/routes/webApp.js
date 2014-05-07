@@ -165,7 +165,8 @@ exports.optionsPage = function(req, res, next)
 				console.log(JSON.stringify(openingDays, undefined, 4));
 				res.render('options', {restaurant: req.restaurant, 
 					openingDays: openingDays,
-					changePass: req.query.changePass});
+					changePass: req.query.changePass,
+					opDayAction: req.query.opDayAction});
 			}		
 	});
 }
@@ -241,15 +242,13 @@ exports.deleteOpeningDay = function(req, res, next)
 
 	req.db.models.openingDay.one({id:id, restaurant_id:restaurant_id}).remove(function(err){
 		if (err)
-			res.redirect('webApp/options?delete=failure');
+			res.redirect('webApp/options?opDayAction=deleteFailure');
 		else
 		{
 			console.log("restaurant id:" + restaurant_id + " delete openingDay id: " + id);
-			res.redirect('/webApp/options?delete?success');
+			res.redirect('/webApp/options?opDayAction=deleteSuccess');
 		}
 	});
-	else
-		res.redirect('webApp/options?delete=failure');
 }
 
 exports.updateOpeningDay = function(req, res, next)
@@ -264,7 +263,7 @@ exports.updateOpeningDay = function(req, res, next)
 	{
 		req.db.models.openingDay.one({id:id, restaurant_id:restaurant_id}, function(err, openingDay){
 			if (err || !openingDay)
-				res.redirect('/webApp/options?update=failure');
+				res.redirect('/webApp/options?opDayAction=updateFailure');
 			else
 			{
 				if (dow)
@@ -275,16 +274,16 @@ exports.updateOpeningDay = function(req, res, next)
 					openingDay.closeTime = closeTime;
 				openingDay.save(function(err, openingDay) {
 					if (err)
-						res.redirect('/webApp/options?update=failure');
+						res.redirect('/webApp/options?opDayAction=updateFailure');
 					else
 					{
 						console.log("update opening day id: " + id);
-						res.redirect('/webApp/options?update=success');
+						res.redirect('/webApp/options?opDayAction=updateSuccess');
 					}
 				});
 			}
 		});
 	}
 	else
-		res.redirect('/webApp/options?update=failure');
+		res.redirect('/webApp/options?opDayAction=updateFailure');
 }
