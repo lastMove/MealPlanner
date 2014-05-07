@@ -35,6 +35,7 @@ exports.myRouter = function(app)
 	app.get('/webApp/openingDay/update/:openingDay_id', authAndLoadRestaurant, webapp.openingDayPage)
 	app.post('/webApp/openingDay/update/:openingDay_id', authAndLoadRestaurant, webapp.updateOpeningDay);
 	app.post('/webApp/openingDay/delete/:openingDay_id', authAndLoadRestaurant, webapp.deleteOpeningDay);
+	app.post('/webApp/openingDay/add', authAndLoadRestaurant, webapp.addOpeningDay);
 
 	// USERS
 	app.get('/auth', authAndLoadUser, users.auth);
