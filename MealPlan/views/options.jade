@@ -38,13 +38,13 @@ html
 				case opDayAction
 					when "deleteFailure"
 						div.alert.alert-danger(style="margin:auto;margin-bottom:20px;")
-							p Error : Opening Day cannot be deleted !
+							p Error : Opening Day cannot be delete !
 					when "deleteSuccess"
 						div.alert.alert-success(style="margin:auto;margin-bottom:20px;")
 							p  Opening Day has successfuly been deleted !
 					when "updateFailure"
 						div.alert.alert-danger(style="margin:auto;margin-bottom:20px;")
-							p Error : Opening Day cannot be updated !
+							p Error : Opening Day cannot be update !
 					when "updateSuccess"
 						div.alert.alert-success(style="margin:auto;margin-bottom:20px;")
 							p  Opening Day has successfuly been updated !
@@ -52,7 +52,7 @@ html
 			div.panel-default.panel
 				div.panel-heading.head-panel-tab
 					h3.panel-title Add Day
-				form(role='form' method="post" action="/webApp/openingDay/update/")
+				form(role='form' method="post" action="/webApp/openingDay/create")
 					table.panel-table
 						tbody
 							tr
@@ -71,6 +71,15 @@ html
 								td
 								td
 									button(class="btn btn-success" type="submit" style="width:155px;") Add Day
+
+			if add
+				case add
+					when "success"
+						div.alert.alert-success(style="margin:auto;margin-bottom:20px;")
+							p Opening day has successfuly been created !
+					when "failure"
+						div.alert.alert-danger(style="margin:auto;margin-bottom:20px;")
+							p Error : Opening day cannot be create !
 
 			div.panel.panel-warning
 				div.panel-heading
