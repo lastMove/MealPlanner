@@ -33,6 +33,8 @@ exports.myRouter = function(app)
 	app.post('/webApp/login', webapp.login);
 	app.get('/webApp/logout', webapp.logout);
 	app.get('/webApp/openingDay/update/:openingDay_id', authAndLoadRestaurant, webapp.openingDayPage)
+	app.post('/webApp/openingDay/update/updateOpeningDay/:openingDay_id', authAndLoadRestaurant, webapp.updateOpeningDay);
+	app.post('/webApp/openingDay/update/deleteOpeningDay/:openingDay_id', authAndLoadRestaurant, webapp.deleteOpeningDay);
 
 	// USERS
 	app.get('/auth', authAndLoadUser, users.auth);

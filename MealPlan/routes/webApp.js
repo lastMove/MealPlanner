@@ -234,7 +234,7 @@ exports.changePassword = function(req, res, next)
 		res.redirect('/webApp/options?changePass=failure');
 }
 
-exports.delete = function(req, res, next)
+exports.deleteOpeningDay = function(req, res, next)
 {
 	var id = req.params.openingDay_id;
 	var restaurant_id = req.restaurant.id;
@@ -253,11 +253,11 @@ exports.delete = function(req, res, next)
 
 exports.updateOpeningDay = function(req, res, next)
 {
-	var id = req.params.openingDay_id,
-	restaurant_id = req.restaurant.id,
-	dow = req.body.dow,
-	openTime = req.body.openTime,
-	closeTime = req.body.closeTime;
+	var id = req.params.openingDay_id;
+	var restaurant_id = req.restaurant.id;
+	var dow = req.body.dow;
+	var openTime = req.body.openTime;
+	var closeTime = req.body.closeTime;
 
 	if (dow || openTime || closeTime)
 	{
