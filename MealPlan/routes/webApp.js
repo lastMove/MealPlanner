@@ -287,3 +287,26 @@ exports.updateOpeningDay = function(req, res, next)
 	else
 		res.redirect('/webApp/options?opDayAction=updateFailure');
 }
+
+exports.addOpeningDay = function(req. res, next)
+{
+	var restaurant_id = req.restaurant.id;
+	var dow = req.body.dow;
+	var openTime = req.body.openTime;
+	var closeTime = req.body.closeTime;
+
+	req.db.models.openingDay.create({
+		dow : dow,
+		openTime : openTime,
+		closeTime : closeTime
+	}, function(err, openingDay) {
+		if (err || !openingDay)
+			res.redirect('/webApp/options?add=failure');
+		else
+		{
+			console.log("create openingDay id: " + openingDay.id);
+			res.redirect('webApp/options?add=success');
+		}
+	});
+>>>>>>> 6ea2c0ce87afeb906538d6515d47262f5e79c511
+}
