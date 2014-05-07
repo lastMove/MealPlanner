@@ -241,7 +241,7 @@ exports.deleteOpeningDay = function(req, res, next)
 	var id = req.params.openingDay_id;
 	var restaurant_id = req.restaurant.id;
 
-	req.db.models.openingDay.one({id:id, restaurant_id:restaurant_id}).remove(function(err){
+	req.db.models.openingDay.find({id:id, restaurant_id:restaurant_id}).remove(function(err){
 		if (err)
 			res.redirect('webApp/options?opDayAction=deleteFailure');
 		else
