@@ -42,13 +42,21 @@ exports.signUp = function(req, res, next)
 	var password = req.body.password;
 	var category = req.body.category;
 	var description = req.body.description;
-	var address = String;                                                                                                             
+	var address = req.body.address;
+	var postalCode = req.body.postalCode;
+	var city = req.body.city;      
+	var mail = req.body.mail;                                                                                                 
 	req.db.models.restaurant.create(
 	{
 		userName : userName,
 		password : password,
 		name : name,
-		category : category
+		description : description,
+		address : address,
+		postalCode : postalCode,
+		city : city,
+		category : category,
+		mail : mail
 	}, function(err, restaurant)
 	{
 		if (err)
