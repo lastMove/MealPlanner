@@ -9,3 +9,4 @@ div.day-choice div.day-list span.bold { font-weight: bold; padding-right: 5px; d
 div.day-choice div.day-list input.checkbox-day { margin-right: 25px; }
 form.form-register { width: 400px; margin: auto; }
 form.form-register .form-control { margin-bottom: 10px; }
+.form-control { margin-left: -10px; }
