@@ -22,8 +22,8 @@ html
 					tbody
 						each i in coupons
 							tr
-								td
-								td
+								td= i.user.userName
+								td= i.dish.name
 								td= i.description
 								td(style="width:80px;")
 									form(method="post" action="/webApp/coupon/delete/" + i.id)
@@ -69,10 +69,10 @@ html
 							p Error : the coupon cannot be created !
 					when "failureUser"
 						div.alert.alert-danger(style="margin:auto;")
-							p Error : the user don't exist !
+							p Error : the user doesn't exist !
 					when "failureDish"
 						div.alert.alert-danger(style="margin:auto;")
-							p Error : the dish don't exist !
+							p Error : the dish doesn't exist !
 
 	include include/footer
 	script(src="../public/js/jQuery/jquery-2.1.1.js")
