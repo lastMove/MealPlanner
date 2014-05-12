@@ -26,11 +26,11 @@ exports.create = function(req, res, next)
 						res.redirect('/webApp/coupon?create=failure');
 					else
 				{
-				console.log("Coupon create with id: " + coupon.id);
-				res.redirect('/webApp/coupon?create=success');
-			}
-		});
-	});
+					console.log("Coupon create with id: " + coupon.id);
+					res.redirect('/webApp/coupon?create=success');
+				}
+				});
+			});
 		}
 	});
 }
