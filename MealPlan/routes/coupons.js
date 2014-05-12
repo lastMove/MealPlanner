@@ -6,34 +6,32 @@ exports.create = function(req, res, next)
 	var userName = req.body.userName;
 	var dishName = req.body.dishName;
 	var description = req.body.description;
-	var user_id;
-	var dish_id;
 
 	req.db.models.user.one({ userName : userName }, function(err, user) {
 		if (err || !user)
 			res.redirect('/webApp/coupon?create=failureUser');
 		else
-			user_id = user.id;
-	});
-	req.db.models.dish.one({ name : dishName }, function(err, dish) {
-		if (err || !dish)
-			res.redirect('/webApp/coupon?create=failureDish');
-		else
-			dish_id = dish.id;
-	});
-
-	req.db.models.coupon.create({
-		restaurant_id	: restaurant_id,
-		user_id			: user_id,
-		dish_id			: dish_id,
-		description		: description  
-	}, function(err, coupon) {
-		if (err || !coupon)
-			res.redirect('/webApp/coupon?create=failure');
-		else
 		{
-			console.log("Coupon create with id: " + coupon.id);
-			res.redirect('/webApp/coupon?create=success');
+			user_id = user.id;
+			req.db.models.dish.one({ name : dishName }, function(err, dish) {
+			if (err || !dish)
+				res.redirect('/webApp/coupon?create=failureDish');
+			else
+				req.db.models.coupon.create({
+				restaurant_id	: restaurant_id,
+				user_id			: user_id,
+				dish_id			: dish_id,
+				description		: description  
+				}, function(err, coupon) {
+					if (err || !coupon)
+						res.redirect('/webApp/coupon?create=failure');
+					else
+				{
+				console.log("Coupon create with id: " + coupon.id);
+				res.redirect('/webApp/coupon?create=success');
+			}
+		});
+	});
 		}
 	});
 }
