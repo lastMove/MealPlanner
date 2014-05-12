@@ -7,6 +7,7 @@ var orders = require('./routes/orders');
 var order_lines = require('./routes/order_lines');
 var reservations = require('./routes/reservations');
 var webapp = require('./routes/webApp');
+var coupons = require('./routes/coupons');
 
 exports.myRouter = function(app)
 {
@@ -36,6 +37,10 @@ exports.myRouter = function(app)
 	app.post('/webApp/openingDay/update/:openingDay_id', authAndLoadRestaurant, webapp.updateOpeningDay);
 	app.post('/webApp/openingDay/delete/:openingDay_id', authAndLoadRestaurant, webapp.deleteOpeningDay);
 	app.post('/webApp/openingDay/create', authAndLoadRestaurant, webapp.addOpeningDay);
+	app.post('/webApp/coupon/create', authAndLoadRestaurant, coupons.create);
+	app.post('/webApp/coupon/delete/:coupon_id', authAndLoadRestaurant, coupons.delete);
+	app.get('/webApp/coupon/read', authAndLoadRestaurant, coupons.readForRestaurant);
+
 
 	// USERS
 	app.get('/auth', authAndLoadUser, users.auth);
@@ -97,7 +102,7 @@ exports.myRouter = function(app)
 authAndLoadUser = function(req, res, next)
 {
 	var userName = req.header("userName");
-	var password = req.header("password");
+	var password  = req.header("password");
 	req.db.models.user.one({"userName":userName},
 			function(err, user)
 			{

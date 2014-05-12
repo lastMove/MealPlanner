@@ -19,6 +19,7 @@ module.exports = function(db, cb)
     db.load("./dish.js", function(err) {checkError(cb, err)});
     db.load("./message.js", function(err) {checkError(cb, err)});
     db.load("./openingDay.js", function(err) {checkError(cb, err)});
+    db.load("./coupon.js", function(err) {checkError(cb, err)});
 
     var Message = db.models.message;
     var User = db.models.user;
@@ -29,6 +30,7 @@ module.exports = function(db, cb)
     var Reservation = db.models.reservation;
     var Restaurant = db.models.restaurant;
     var OpeningDay = db.models.openingDay;
+    var Coupon = db.models.coupon;
 
     OpeningDay.hasOne('restaurant', Restaurant, {reverse : "restaurants", autoFetch : false});
 
@@ -55,5 +57,10 @@ module.exports = function(db, cb)
     Dish.hasOne("restaurant", Restaurant, {reverse : "dishes"});
 
     User.hasMany("friends");
+
+    Coupon.hasOne("restaurant", Restaurant);
+    Coupon.hasOne("dish", Dish);
+    Coupon.hasOne("user", User);
+
     db.sync();
 }   
