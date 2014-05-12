@@ -11,13 +11,13 @@ exports.create = function(req, res, next)
 
 	req.db.models.user.one({ userName : userName }, function(err, user) {
 		if (err || !user)
-			res.redirect('/webApp/coupons?create=failureUser');
+			res.redirect('/webApp/coupon?create=failureUser');
 		else
 			user_id = user.id;
 	});
 	req.db.models.dish.one({ name : dishName }, function(err, dish) {
 		if (err || !dish)
-			res.redirect('/webApp/coupons?create=failureDish');
+			res.redirect('/webApp/coupon?create=failureDish');
 		else
 			dish_id = dish.id;
 	});
@@ -29,11 +29,11 @@ exports.create = function(req, res, next)
 		description		: description  
 	}, function(err, coupon) {
 		if (err || !coupon)
-			res.redirect('/webApp/coupons?create=failure');
+			res.redirect('/webApp/coupon?create=failure');
 		else
 		{
 			console.log("Coupon create with id: " + coupon.id);
-			res.redirect('/webApp/coupons?create=success');
+			res.redirect('/webApp/coupon?create=success');
 		}
 	});
 }
@@ -49,11 +49,11 @@ exports.delete = function(req, res, next)
 			restaurant_id : restaurant_id
 		}).remove(function(err) {
 			if (err)
-				res.redirect('/webApp/coupons?deleteCoupon=failure');
+				res.redirect('/webApp/coupon?deleteCoupon=failure');
 			else
 			{
 				console.log("restaurant_id id : " + restaurant_id + " delete coupon id: " + id);
-				res.redirect('/webApp/coupons?deleteCoupon=success');
+				res.redirect('/webApp/coupon?deleteCoupon=success');
 			}
 		});
 }
