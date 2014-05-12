@@ -39,7 +39,7 @@ exports.myRouter = function(app)
 	app.post('/webApp/openingDay/create', authAndLoadRestaurant, webapp.addOpeningDay);
 	app.post('/webApp/coupon/create', authAndLoadRestaurant, coupons.create);
 	app.post('/webApp/coupon/delete/:coupon_id', authAndLoadRestaurant, coupons.delete);
-	app.get('/webApp/coupon/read', authAndLoadRestaurant, coupons.readForRestaurant);
+	app.get('/webApp/coupon', authAndLoadRestaurant, coupons.couponPage);
 
 
 	// USERS

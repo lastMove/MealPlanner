@@ -34,16 +34,16 @@ exports.delete = function(req, res, next)
 			restaurant_id : restaurant_id
 		}).remove(function(err) {
 			if (err)
-				res.redirect('/webApp/coupons?delete=failure');
+				res.redirect('/webApp/coupons?deleteCoupon=failure');
 			else
 			{
 				console.log("restaurant_id id : " + restaurant_id + " delete coupon id: " + id);
-				res.redirect('/webApp/coupons?delete=success');
+				res.redirect('/webApp/coupons?deleteCoupon=success');
 			}
 		});
 }
 
-exports.readForRestaurant = function(req, res, next)
+exports.couponPage = function(req, res, next)
 {
 	var restaurant_id = req.restaurant.id;
 
@@ -56,7 +56,8 @@ exports.readForRestaurant = function(req, res, next)
 			else
 			{
 				console.log("read coupons with restaurant_id: " + restaurant_id);
-				res.send(coupons);
+				console.log(JSON.stringify(coupons));
+				res.render('coupons', { coupons : coupons });
 			}
 	})
 }
