@@ -121,7 +121,7 @@
                "MethodName":"create a meeting",
                "Synopsis":"This method allows you to create a meeting",
                "HTTPMethod":"POST",
-               "URI":"/meeting/create",
+               "URI":"/meetings/create",
                "RequiresOAuth":"N",
                "parameters":[
                   {
@@ -162,7 +162,7 @@
                "MethodName":"update a meeting",
                "Synopsis":"This method allows you to create a meeting",
                "HTTPMethod":"POST",
-               "URI":"/meeting/create",
+               "URI":"/meetings/create",
                "RequiresOAuth":"N",
                "parameters":[
                   {

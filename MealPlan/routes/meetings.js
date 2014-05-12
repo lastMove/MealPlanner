@@ -7,7 +7,7 @@ exports.create = function(req, res, next)
 	var endDate = req.body.endDate;
 	var restaurant_id = req.body.restaurant_id ? req.body.restaurant_id : 0;
 	var name =req.body.name;
-
+	
 	req.db.models.meeting.create(
 	{
 		address:address,
@@ -26,7 +26,7 @@ exports.create = function(req, res, next)
 				next(newErr(500, err));
 			res.send(meeting);
 
-		})
+		});
 	})
 }
 
@@ -58,12 +58,7 @@ exports.update = function(req, res, next)
 
 exports.readOne = function(req, res, next)
 {
-	req.db.models.meeting.get(req.params.meeting_id, function (err, meeting)
-	{
-		if (err)
-			next(newErr(500, err));
-		res.send(meeting);
-	});
+	res.send(req.meeting);
 }
 
 exports.delete = function(req, res, next)

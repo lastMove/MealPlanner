@@ -7,9 +7,9 @@ exports.createUser = function(req, res, next)
 	var userName = req.body.userName;
 	var password = req.body.password;
 	var mail = req.body.mail;
+
 	if (!userName || !password || !mail)
 		throw newErr(500, "userName, password or mail missing");
-	console.log("Before create");
 	req.db.models.user.create(
 	{
 		userName:userName,
