@@ -56,8 +56,11 @@ exports.couponPage = function(req, res, next)
 			else
 			{
 				console.log("read coupons with restaurant_id: " + restaurant_id);
-				console.log(JSON.stringify(coupons));
-				res.render('coupons', { coupons : coupons });
+				console.log(JSON.stringify(coupons, undefined, 4));
+				res.render('coupon', { coupons : coupons,
+				restaurantName : req.restaurant.name,
+				deleteCoupon : req.query.deleteCoupon,
+				create : req.query.create });
 			}
 	})
 }
