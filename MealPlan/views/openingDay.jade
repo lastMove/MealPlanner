@@ -1,0 +1,41 @@
+doctype html
+html
+	head
+		include include/meta
+		title= "Meal Planner - Opening Day Update"
+
+	body
+		include include/menu
+		div.container
+			include include/title
+			h2 Dish - Update
+			div.panel-warning.panel
+				div.panel-heading.head-panel-tab
+					h3.panel-title #{openingDay.dow}
+				form(role='form' method="post" action="/webApp/openingDay/update/" + openingDay.id)
+					table.panel-table
+						tbody
+							tr
+								td.td-title Day :
+								td
+									input(type="text" name="dow" required="" value=openingDay.dow)
+							tr
+								td.td-title Opening Hour :
+								td
+									input(type="text" name="openTime" required="" value=openingDay.openTime)
+							tr
+								td.td-title Closing Hour :
+								td
+									input(type="text" name="closeTime" required="" value=openingDay.closeTime)
+							tr
+								td
+									a(class="btn btn-default" href="/webApp/options" style="width:90px;") Go Back
+								td
+									button(class="btn btn-success" type="submit" style="width:155px;") Update Day
+
+
+	include include/footer
+	script(src="/public/js/jQuery/jquery-2.1.1.js")
+	script(src="/public/js/bootstrap-3.1.1-dist/js/bootstrap.min.js")
+	script(type="text/javascript" charset="utf8" src="/public/js/dataTables-1.10.0/media/js/jquery.dataTables.js")
+	script(src="/public/js/bootstrap-helper/dist/js/bootstrap-formhelpers.min.js")
