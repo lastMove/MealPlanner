@@ -3,9 +3,24 @@ var newErr = require('../error').newError;
 exports.create = function(req, res, next)
 {
 	var restaurant_id = req.restaurant.id;
-	var user_id = req.body.user_id;
-	var dish_id = req.body.dish_id;
+	var userName = req.body.userName;
+	var dishName = req.body.dishName;
 	var description = req.body.description;
+	var user_id;
+	var dish_id;
+
+	req.db.models.user.one({ userName : userName }, function(err, user) {
+		if (err || !user)
+			res.redirect('/webApp/coupons?create=failureUser');
+		else
+			user_id = user.id;
+	});
+	req.db.models.dish.one({ name : dishName }, function(err, dish) {
+		if (err || !dish)
+			res.redirect('/webApp/coupons?create=failureDish');
+		else
+			dish_id = dish.id;
+	});
 
 	req.db.models.coupon.create({
 		restaurant_id	: restaurant_id,
