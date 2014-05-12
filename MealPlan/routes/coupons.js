@@ -12,15 +12,14 @@ exports.create = function(req, res, next)
 			res.redirect('/webApp/coupon?create=failureUser');
 		else
 		{
-			user_id = user.id;
 			req.db.models.dish.one({ name : dishName }, function(err, dish) {
 			if (err || !dish)
 				res.redirect('/webApp/coupon?create=failureDish');
 			else
 				req.db.models.coupon.create({
 				restaurant_id	: restaurant_id,
-				user_id			: user_id,
-				dish_id			: dish_id,
+				user_id			: user.id,
+				dish_id			: dish.id,
 				description		: description  
 				}, function(err, coupon) {
 					if (err || !coupon)
