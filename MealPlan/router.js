@@ -8,6 +8,7 @@ var order_lines = require('./routes/order_lines');
 var reservations = require('./routes/reservations');
 var webapp = require('./routes/webApp');
 var coupons = require('./routes/coupons');
+var stats = require('./routes/stats');
 
 exports.myRouter = function(app)
 {
@@ -40,6 +41,7 @@ exports.myRouter = function(app)
 	app.post('/webApp/coupon/create', authAndLoadRestaurant, coupons.create);
 	app.post('/webApp/coupon/delete/:coupon_id', authAndLoadRestaurant, coupons.delete);
 	app.get('/webApp/coupon', authAndLoadRestaurant, coupons.couponPage);
+	app.get('/webApp/stats', authAndLoadRestaurant, stats.statsPage);
 
 
 	// USERS
