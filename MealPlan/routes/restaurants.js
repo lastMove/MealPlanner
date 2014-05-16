@@ -66,7 +66,7 @@ exports.getRestaurants = function(req, res, next)
 
 exports.getOneRestaurant = function(req, res, next)
 {
-	req.db.models.restaurant.get(req.params.re, function(err, restaurants)
+	req.db.models.restaurant.find({id : req.params.restaurant_id}, function(err, restaurants)
 	{
 		if (err)
 			res.send(err);
@@ -76,7 +76,7 @@ exports.getOneRestaurant = function(req, res, next)
 
 exports.restaurantsByCategory = function(req, res, next)
 {
-	var category = req.body.category;
+	var category = req.params.category;
 req.db.models.restaurant.find({category: category}, function(err, restaurants)
 	{
 		if (err)

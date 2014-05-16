@@ -60,6 +60,7 @@ exports.myRouter = function(app)
 	app.delete('/meetings/:meeting_id/delete', authAndLoadUser, loadMeeting, meetings.delete);
 	app.get('/meetings/:meeting_id/members/read', authAndLoadUser, loadMeeting, meetings.listMembers);
 	app.put('/meetings/:meeting_id/members/add/:user_id', authAndLoadUser, loadMeeting, meetings.addMembers);
+	app.put('/meetings/:meeting_id/members/remove/:user_id', authAndLoadUser, loadMeeting, meetings.removeMember);
 
 	// MESSAGES (MEETINGS)
 	app.get('/meetings/:meeting_id/messages/read', authAndLoadUser, loadMeeting, messages.readAll);

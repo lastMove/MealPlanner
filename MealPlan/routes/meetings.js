@@ -90,10 +90,30 @@ exports.readByUser = function(req, res, next)
 	})	
 }
 
+exports.removeMember = function(req, res, next)
+{
+	req.db.models.user.get(req.params.user_id, function(err, user)
+	{
+		if (err || !user)
+			next(newErr(500, "member not found"));
+		req.meeting.removeMembers(user, function(err, data)
+		{
+			if (err)
+			{
+				next(err);
+				return ;
+			}
+			res.send(data);
+		});
+	});
+}
+
 exports.addMembers = function(req, res, next)
 {
+	console.log("Add it");
 	req.db.models.user.get(req.params.user_id, function(err, friend)
 	{
+		console.log("Get user" + JSON.stringify(friend)); 
 		if (err || !friend)
 			next(newErr(500, "user not found"));
 		req.meeting.addMembers(friend, function(err, data)
