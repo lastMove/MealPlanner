@@ -63,10 +63,11 @@ exports.readOne = function(req, res, next)
 
 exports.delete = function(req, res, next)
 {
-	req.meeting.remove(function(err)
+	req.meeting.remove(function(err,data)
 	{
 		if (err)
 			next(err);
+		res.send(data);
 	})
 }
 
@@ -115,7 +116,11 @@ exports.addMembers = function(req, res, next)
 	{
 		console.log("Get user" + JSON.stringify(friend)); 
 		if (err || !friend)
+		{
 			next(newErr(500, "user not found"));
+			return ;
+
+		}
 		req.meeting.addMembers(friend, function(err, data)
 		{
 			if (err)
